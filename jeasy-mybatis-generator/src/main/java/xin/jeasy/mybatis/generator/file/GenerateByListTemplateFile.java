@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.file;
+package xin.jeasy.mybatis.generator.file;
 
 import java.util.Properties;
 import java.util.Set;
@@ -6,8 +6,8 @@ import java.util.Set;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
 
-import com.dayu.jeasy.mybatis.generator.format.ListTemplateFormatter;
-import com.dayu.jeasy.mybatis.generator.model.TableClass;
+import xin.jeasy.mybatis.generator.format.ListTemplateFormatter;
+import xin.jeasy.mybatis.generator.model.TableClass;
 
 /**
  *

@@ -1,8 +1,8 @@
-package com.dayu.jeasy.mybatis.generator.format;
+package xin.jeasy.mybatis.generator.format;
 
 import java.util.Properties;
 
-import com.dayu.jeasy.mybatis.generator.model.TableClass;
+import xin.jeasy.mybatis.generator.model.TableClass;
 
 /**
  *

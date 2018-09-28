@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.comment;
+package xin.jeasy.mybatis.generator.comment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

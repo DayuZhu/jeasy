@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.model;
+package xin.jeasy.mybatis.generator.model;
 
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 

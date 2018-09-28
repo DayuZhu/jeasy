@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.plugin;
+package xin.jeasy.mybatis.generator.plugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;

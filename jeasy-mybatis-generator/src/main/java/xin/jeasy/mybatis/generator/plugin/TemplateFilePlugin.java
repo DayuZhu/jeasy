@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.plugin;
+package xin.jeasy.mybatis.generator.plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,12 +21,12 @@ import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.util.StringUtility;
 
-import com.dayu.jeasy.mybatis.generator.file.GenerateByListTemplateFile;
-import com.dayu.jeasy.mybatis.generator.file.GenerateByTemplateFile;
-import com.dayu.jeasy.mybatis.generator.format.ListTemplateFormatter;
-import com.dayu.jeasy.mybatis.generator.format.TemplateFormatter;
-import com.dayu.jeasy.mybatis.generator.model.TableClass;
-import com.dayu.jeasy.mybatis.generator.model.TableColumnBuilder;
+import xin.jeasy.mybatis.generator.file.GenerateByListTemplateFile;
+import xin.jeasy.mybatis.generator.file.GenerateByTemplateFile;
+import xin.jeasy.mybatis.generator.format.ListTemplateFormatter;
+import xin.jeasy.mybatis.generator.format.TemplateFormatter;
+import xin.jeasy.mybatis.generator.model.TableClass;
+import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
 
 /**
  * 每一个模板都需要配置一个插件，可以配置多个

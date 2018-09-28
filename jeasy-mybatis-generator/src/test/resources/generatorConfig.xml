@@ -10,16 +10,16 @@
 		<property name="endingDelimiter" value="`" />
 
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.LimitForMySQLPagePlugin" />
+			type="xin.jeasy.mybatis.generator.plugin.LimitForMySQLPagePlugin" />
 
 		<!-- <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" /> -->
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.ExtendsAndSerializablePlugin">
+			type="xin.jeasy.mybatis.generator.plugin.ExtendsAndSerializablePlugin">
 			<property name="addGWTInterface" value="false" />
 			<property name="suppressJavaInterface" value="false" />
 		</plugin>
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.MapperClientPlugin">
+			type="xin.jeasy.mybatis.generator.plugin.MapperClientPlugin">
 			<property name="baseInterface" value="com.rsdayu.commons.persistence.BaseMapper" />
 			<property name="genericsNum" value="2" />
 		</plugin>
@@ -27,16 +27,16 @@
 
 		<!-- 生成实体类中的 toString() 方法 -->
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.GuavaToStringPlugin" />
+			type="xin.jeasy.mybatis.generator.plugin.GuavaToStringPlugin" />
 
 <!-- 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="TemplateFilePlugin">
 			<property name="targetProject" value="src/test/java" />
 			<property name="targetPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests.web.controller" />
 			<property name="templatePath" value="templates/controller.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
+				value="FreemarkerTemplateFormatter" />
 			<property name="mapperSuffix" value="Controller" />
 			<property name="projectPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests" />
@@ -48,13 +48,13 @@
 
 		<!-- 自动生成 Service 类 -->
 <!-- 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="TemplateFilePlugin">
 			<property name="targetProject" value="src/test/java" />
 			<property name="targetPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests.service" />
 			<property name="templatePath" value="templates/service.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
+				value="FreemarkerTemplateFormatter" />
 			<property name="mapperSuffix" value="Service" />
 			<property name="projectPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests" />
@@ -64,12 +64,12 @@
 
 		<!-- 自动生成自定义 Mapper.xml -->
 <!-- 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="TemplateFilePlugin">
 			<property name="targetProject" value="src/test/resources" />
 			<property name="targetPackage" value="db/extmapper" />
 			<property name="templatePath" value="templates/extmapper.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
+				value="FreemarkerTemplateFormatter" />
 			<property name="mapperPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests.mapper.ext" />
 			<property name="mapperSuffix" value="ExtMapper" />
@@ -80,13 +80,13 @@
 		<!-- 自动生成自定义Interface Mapper -->
 
 <!-- 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="TemplateFilePlugin">
 			<property name="targetProject" value="src/test/java" />
 			<property name="targetPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests.mapper.ext" />
 			<property name="templatePath" value="templates/extinterfacemapper.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
+				value="FreemarkerTemplateFormatter" />
 			<property name="mapperSuffix" value="ExtMapper" />
 			<property name="projectPackage"
 				value="com.dayu.jeasy.mybatis.generator.tests" />
@@ -96,23 +96,23 @@
 
 		<!-- 自动生成自定义 HtmlEdit -->
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
 			<property name="targetProject" value="src/main/webapp" />
 			<property name="targetPackage" value="html/${tableClass.lowerCaseName}/" />
 			<property name="templatePath" value="templates/htmledit.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />			
+				value="xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
 			<property name="fileName" value="edit2.html" />
 		</plugin>
 		
 		<!-- 自动生成自定义 HtmlTable -->
 		<plugin
-			type="com.dayu.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+			type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
 			<property name="targetProject" value="src/main/webapp" />
 			<property name="targetPackage" value="html/${tableClass.lowerCaseName}/" />
 			<property name="templatePath" value="templates/htmltable.ftl" />
 			<property name="templateFormatter"
-				value="com.dayu.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />			
+				value="xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter" />
 			<property name="fileName" value="table2.html" />
 			
 		</plugin>
@@ -121,7 +121,7 @@
 
 		<!-- 生成数据库字段注释及自定义注释 【扩展插件】 -->
 		<commentGenerator
-			type="com.dayu.jeasy.mybatis.generator.comment.RemarksCommentGenerator">
+			type="xin.jeasy.mybatis.generator.comment.RemarksCommentGenerator">
 
 			<!-- 是否去掉注释 -->
 			<property name="suppressDate" value="true" />

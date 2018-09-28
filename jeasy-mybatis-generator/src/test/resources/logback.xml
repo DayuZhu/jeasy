@@ -39,7 +39,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.dayu" level="debug" />
+	<logger name="xin.jeasy" level="debug" />
 	<logger name="org.springframework" level="info" />
 	<logger name="org.apache.ibatis" level="debug" />
 

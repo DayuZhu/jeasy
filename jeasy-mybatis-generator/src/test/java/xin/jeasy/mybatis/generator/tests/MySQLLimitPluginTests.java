@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.tests;
+package xin.jeasy.mybatis.generator.tests;
 
 import java.util.ArrayList;
 import java.util.List;

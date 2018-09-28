@@ -1,4 +1,4 @@
-package com.dayu.jeasy.mybatis.generator.plugin;
+package xin.jeasy.mybatis.generator.plugin;
 
 import java.util.List;
 import java.util.Properties;
