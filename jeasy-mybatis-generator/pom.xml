@@ -128,7 +128,7 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<configuration>
 					<attach>true</attach>
-					<encoding>${project.build.sourceEncoding}</encoding>
+				<!--	<encoding>UTF-8</encoding>-->
 				</configuration>
 				<executions>
 					<execution>
