@@ -40,42 +40,41 @@ import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
  *      &lt;property name="templateFormatter" value="xxx.FreemarkerTemplateFormatter"/&gt;
  * &lt;/plugin&gt;
  * </pre>
- *
  */
 public class TemplateFilePlugin extends PluginAdapter {
     /**
      * 默认的模板格式化类
      */
-    public static final String DEFAULT_TEMPLATEFORMATTER = "tk.mybatis.mapper.generator.formatter.FreemarkerTemplateFormatter";
+    public static final String DEFAULT_TEMPLATEFORMATTER = "xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter";
     /**
      * 单个文件模式
      */
-    private String          singleMode;
+    private String singleMode;
     /**
      * 项目路径（目录需要已经存在）
      */
-    private String          targetProject;
+    private String targetProject;
     /**
      * 生成的包（路径不存在则创建）
      */
-    private String          targetPackage;
+    private String targetPackage;
     /**
      * 模板路径
      */
-    private String          templatePath;
+    private String templatePath;
     /**
      * 模板内容
      */
-    private String          templateContent;
+    private String templateContent;
     /**
      * 文件名模板，通过模板方式生成文件名，包含后缀
      */
-    private String          fileName;
+    private String fileName;
     /**
      * 模板生成器
      */
-    private Object          templateFormatter;
-    private String          templateFormatterClass;
+    private Object templateFormatter;
+    private String templateFormatterClass;
     private Set<TableClass> cacheTables;
 
     /**

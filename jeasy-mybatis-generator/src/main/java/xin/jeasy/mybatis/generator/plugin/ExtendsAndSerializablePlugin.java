@@ -12,98 +12,98 @@ import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 public class ExtendsAndSerializablePlugin extends PluginAdapter {
-	private FullyQualifiedJavaType serializable;
-	// private FullyQualifiedJavaType page;
-	private FullyQualifiedJavaType gwtSerializable;
-	private boolean addGWTInterface;
-	private boolean suppressJavaInterface;
+    private FullyQualifiedJavaType serializable;
+    // private FullyQualifiedJavaType page;
+    private FullyQualifiedJavaType gwtSerializable;
+    private boolean addGWTInterface;
+    private boolean suppressJavaInterface;
 
-	public ExtendsAndSerializablePlugin() {
-		super();
-		// page = new
-		// FullyQualifiedJavaType("com.dayu.commons.persistence.Page");
-		serializable = new FullyQualifiedJavaType("java.io.Serializable"); //$NON-NLS-1$
-		gwtSerializable = new FullyQualifiedJavaType("com.google.gwt.user.client.rpc.IsSerializable"); //$NON-NLS-1$
-	}
+    public ExtendsAndSerializablePlugin() {
+        super();
+        // page = new
+        // FullyQualifiedJavaType("com.dayu.commons.persistence.Page");
+        serializable = new FullyQualifiedJavaType("java.io.Serializable"); //$NON-NLS-1$
+        gwtSerializable = new FullyQualifiedJavaType("com.google.gwt.user.client.rpc.IsSerializable"); //$NON-NLS-1$
+    }
 
-	@Override
-	public boolean validate(List<String> warnings) {
-		// this plugin is always valid
-		return true;
-	}
+    @Override
+    public boolean validate(List<String> warnings) {
+        // this plugin is always valid
+        return true;
+    }
 
-	@Override
-	public void setProperties(Properties properties) {
-		super.setProperties(properties);
-		addGWTInterface = Boolean.valueOf(properties.getProperty("addGWTInterface")); //$NON-NLS-1$
-		suppressJavaInterface = Boolean.valueOf(properties.getProperty("suppressJavaInterface")); //$NON-NLS-1$
-	}
+    @Override
+    public void setProperties(Properties properties) {
+        super.setProperties(properties);
+        addGWTInterface = Boolean.valueOf(properties.getProperty("addGWTInterface")); //$NON-NLS-1$
+        suppressJavaInterface = Boolean.valueOf(properties.getProperty("suppressJavaInterface")); //$NON-NLS-1$
+    }
 
-	@Override
-	public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		makeSerializable(topLevelClass, introspectedTable);
-		return true;
-	}
+    @Override
+    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        makeSerializable(topLevelClass, introspectedTable);
+        return true;
+    }
 
-	@Override
-	public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		makeSerializable(topLevelClass, introspectedTable);
-		return true;
-	}
+    @Override
+    public boolean modelPrimaryKeyClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        makeSerializable(topLevelClass, introspectedTable);
+        return true;
+    }
 
-	@Override
-	public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass,
-			IntrospectedTable introspectedTable) {
-		makeSerializable(topLevelClass, introspectedTable);
-		return true;
-	}
+    @Override
+    public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass,
+                                                      IntrospectedTable introspectedTable) {
+        makeSerializable(topLevelClass, introspectedTable);
+        return true;
+    }
 
-	/**
-	 * 添加给Example类序列化的方法
-	 * 
-	 * @param topLevelClass
-	 * @param introspectedTable
-	 * @return
-	 */
-	@Override
-	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+    /**
+     * 添加给Example类序列化的方法
+     *
+     * @param topLevelClass
+     * @param introspectedTable
+     * @return
+     */
+    @Override
+    public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 
-		if (!suppressJavaInterface) {
-			topLevelClass.addImportedType(serializable);
-			topLevelClass.addSuperInterface(serializable);
-			Field classField = new Field();
-			classField.setFinal(true);
-			classField.setInitializationString("1L"); //$NON-NLS-1$
-			classField.setName("serialVersionUID"); //$NON-NLS-1$
-			classField.setStatic(true);
-			classField.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
-			classField.setVisibility(JavaVisibility.PRIVATE);
-			topLevelClass.addField(classField);
+        if (!suppressJavaInterface) {
+            topLevelClass.addImportedType(serializable);
+            topLevelClass.addSuperInterface(serializable);
+            Field classField = new Field();
+            classField.setFinal(true);
+            classField.setInitializationString("1L"); //$NON-NLS-1$
+            classField.setName("serialVersionUID"); //$NON-NLS-1$
+            classField.setStatic(true);
+            classField.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
+            classField.setVisibility(JavaVisibility.PRIVATE);
+            topLevelClass.addField(classField);
 
-			for (InnerClass innerClass : topLevelClass.getInnerClasses()) {
-				if ("GeneratedCriteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
-					innerClass.addSuperInterface(serializable);
+            for (InnerClass innerClass : topLevelClass.getInnerClasses()) {
+                if ("GeneratedCriteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
+                    innerClass.addSuperInterface(serializable);
 
-					Field field = new Field();
-					field.setFinal(true);
-					field.setInitializationString("1L"); //$NON-NLS-1$
-					field.setName("serialVersionUID"); //$NON-NLS-1$
-					field.setStatic(true);
-					field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
-					field.setVisibility(JavaVisibility.PRIVATE);
-					innerClass.addField(field);
-				}
-				if ("Criteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
-					innerClass.addSuperInterface(serializable);
-					Field field = new Field();
-					field.setFinal(true);
-					field.setInitializationString("1L"); //$NON-NLS-1$
-					field.setName("serialVersionUID"); //$NON-NLS-1$
-					field.setStatic(true);
-					field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
-					field.setVisibility(JavaVisibility.PRIVATE);
-					innerClass.addField(field);
-				}
+                    Field field = new Field();
+                    field.setFinal(true);
+                    field.setInitializationString("1L"); //$NON-NLS-1$
+                    field.setName("serialVersionUID"); //$NON-NLS-1$
+                    field.setStatic(true);
+                    field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
+                    field.setVisibility(JavaVisibility.PRIVATE);
+                    innerClass.addField(field);
+                }
+                if ("Criteria".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
+                    innerClass.addSuperInterface(serializable);
+                    Field field = new Field();
+                    field.setFinal(true);
+                    field.setInitializationString("1L"); //$NON-NLS-1$
+                    field.setName("serialVersionUID"); //$NON-NLS-1$
+                    field.setStatic(true);
+                    field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
+                    field.setVisibility(JavaVisibility.PRIVATE);
+                    innerClass.addField(field);
+                }
 				/*if ("Criterion".equals(innerClass.getType().getShortName())) { //$NON-NLS-1$
 					innerClass.addSuperInterface(serializable);
 					Field field = new Field();
@@ -115,38 +115,38 @@ public class ExtendsAndSerializablePlugin extends PluginAdapter {
 					field.setVisibility(JavaVisibility.PRIVATE);
 					innerClass.addField(field);
 				}*/
-			}
-		}
-		return true;
-	}
+            }
+        }
+        return true;
+    }
 
-	protected void makeSerializable(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		if (addGWTInterface) {
-			// topLevelClass.addImportedType(page);
-			// topLevelClass.setSuperClass(page);
+    protected void makeSerializable(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        if (addGWTInterface) {
+            // topLevelClass.addImportedType(page);
+            // topLevelClass.setSuperClass(page);
 
-			topLevelClass.addImportedType(gwtSerializable);
-			topLevelClass.addSuperInterface(gwtSerializable);
-		}
+            topLevelClass.addImportedType(gwtSerializable);
+            topLevelClass.addSuperInterface(gwtSerializable);
+        }
 
-		if (!suppressJavaInterface) {
+        if (!suppressJavaInterface) {
 
-			// topLevelClass.addImportedType(page);
-			// topLevelClass.setSuperClass(page);
+            // topLevelClass.addImportedType(page);
+            // topLevelClass.setSuperClass(page);
 
-			topLevelClass.addImportedType(serializable);
-			topLevelClass.addSuperInterface(serializable);
+            topLevelClass.addImportedType(serializable);
+            topLevelClass.addSuperInterface(serializable);
 
-			Field field = new Field();
-			field.setFinal(true);
-			field.setInitializationString("1L"); //$NON-NLS-1$
-			field.setName("serialVersionUID"); //$NON-NLS-1$
-			field.setStatic(true);
-			field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
-			field.setVisibility(JavaVisibility.PRIVATE);
-			context.getCommentGenerator().addFieldComment(field, introspectedTable);
+            Field field = new Field();
+            field.setFinal(true);
+            field.setInitializationString("1L"); //$NON-NLS-1$
+            field.setName("serialVersionUID"); //$NON-NLS-1$
+            field.setStatic(true);
+            field.setType(new FullyQualifiedJavaType("long")); //$NON-NLS-1$
+            field.setVisibility(JavaVisibility.PRIVATE);
+            context.getCommentGenerator().addFieldComment(field, introspectedTable);
 
-			topLevelClass.addField(field);
-		}
-	}
+            topLevelClass.addField(field);
+        }
+    }
 }
