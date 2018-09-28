@@ -99,7 +99,7 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
      */
     private void copyAndAddMethod(Method method, Interface interfaze) {
         Method newMethod = new Method(method);
-        newMethod.setName(method.getName() + "WithLimit"); //$NON-NLS-1$
+        newMethod.setName(method.getName() + "WithLimit");
         interfaze.addMethod(newMethod);
     }
 
@@ -115,9 +115,9 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
         // remove old id attribute and add a new one with the new name
         for (Iterator<Attribute> iterator = newElement.getAttributes().iterator(); iterator.hasNext(); ) {
             Attribute attribute = iterator.next();
-            if ("id".equals(attribute.getName())) { //$NON-NLS-1$
+            if ("id".equals(attribute.getName())) {
                 iterator.remove();
-                Attribute newAttribute = new Attribute("id", attribute.getValue() + "WithLimit"); //$NON-NLS-1$ //$NON-NLS-2$
+                Attribute newAttribute = new Attribute("id", attribute.getValue() + "WithLimit");
                 newElement.addAttribute(newAttribute);
 
                 XmlElement ifLimitNotNullElement = new XmlElement("if");

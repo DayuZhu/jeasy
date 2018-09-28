@@ -24,7 +24,7 @@ import ch.qos.logback.core.joran.spi.JoranException;
 public class MySQLLimitPluginTests {
 
 	static {
-		String logbackXml = "D:/Project/workspace-arch2018.2-smeml/mybatis-generator-plugin/src/test/resources/logback.xml";
+		String logbackXml = "E:\\Users\\Dayu\\IdeaProjects\\jeasy\\jeasy-mybatis-generator\\src\\test\\resources\\logback.xml";
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		JoranConfigurator configurator = new JoranConfigurator();
 		configurator.setContext(lc);
