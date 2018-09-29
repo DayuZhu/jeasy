@@ -18,10 +18,7 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.xml.Attribute;
-import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.api.dom.xml.TextElement;
-import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.api.dom.xml.*;
 
 
 public class LimitForMySQLPagePlugin extends PluginAdapter {
@@ -59,7 +56,7 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
     public boolean sqlMapSelectByExampleWithoutBLOBsElementGenerated(XmlElement element,
                                                                      IntrospectedTable introspectedTable) {
         if (introspectedTable.getTargetRuntime() == TargetRuntime.MYBATIS3) {
-            copyAndSaveElement(element, introspectedTable.getFullyQualifiedTable());
+            copyAndSaveElement(element, introspectedTable);
         }
         return true;
     }
@@ -68,7 +65,7 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
     public boolean sqlMapSelectByExampleWithBLOBsElementGenerated(XmlElement element,
                                                                   IntrospectedTable introspectedTable) {
         if (introspectedTable.getTargetRuntime() == TargetRuntime.MYBATIS3) {
-            copyAndSaveElement(element, introspectedTable.getFullyQualifiedTable());
+            copyAndSaveElement(element, introspectedTable);
         }
         return true;
     }
@@ -79,6 +76,7 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
      */
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
+
         List<XmlElement> elements = elementsToAdd.get(introspectedTable.getFullyQualifiedTable());
         if (elements != null) {
             for (XmlElement element : elements) {
@@ -101,7 +99,8 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
     /**
      * Use the method copy constructor to create a new element
      */
-    private void copyAndSaveElement(XmlElement element, FullyQualifiedTable fqt) {
+    private void copyAndSaveElement(XmlElement element, IntrospectedTable introspectedTable) {
+        FullyQualifiedTable fqt = introspectedTable.getFullyQualifiedTable();
         XmlElement newElement = new XmlElement(element);
 
         // remove old id attribute and add a new one with the new name
@@ -111,6 +110,14 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
                 iterator.remove();
                 Attribute newAttribute = new Attribute("id", attribute.getValue() + "WithLimit");
                 newElement.addAttribute(newAttribute);
+                Element element1 = new Element() {
+                    @Override
+                    public String getFormattedContent(int indentLevel) {
+                        return "\tselect t.* from ( ";
+                    }
+                };
+                newElement.addElement(0, element1);
+
 
                 XmlElement ifLimitNotNullElement = new XmlElement("if");
                 ifLimitNotNullElement.addAttribute(new Attribute("test", "limit != null"));
@@ -126,6 +133,17 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
                 ifLimitNotNullElement.addElement(ifOffsetNullElement);
 
                 newElement.addElement(ifLimitNotNullElement);
+
+                Element element2 = new Element() {
+                    @Override
+                    public String getFormattedContent(int indentLevel) {
+                        return "\t) a, " + fqt.getFullyQualifiedTableNameAtRuntime() + " t\n" +
+                                "\t where a." + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName()
+                                + " = t." + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + "";
+                    }
+                };
+
+                newElement.addElement(element2);
                 break;
             }
         }
