@@ -1,4 +1,4 @@
-# jeasy
+# jeasy-mybatis-generator
 目前jeasy只提供mybatis-generator扩展,扩展分页插件，模板插件等
 
 分页插件使用
