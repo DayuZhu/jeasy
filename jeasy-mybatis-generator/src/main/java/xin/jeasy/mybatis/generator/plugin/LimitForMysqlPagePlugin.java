@@ -21,11 +21,11 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.*;
 
 
-public class LimitForMySQLPagePlugin extends PluginAdapter {
+public class LimitForMysqlPagePlugin extends PluginAdapter {
 
     private Map<FullyQualifiedTable, List<XmlElement>> elementsToAdd;
 
-    public LimitForMySQLPagePlugin() {
+    public LimitForMysqlPagePlugin() {
         elementsToAdd = new HashMap<FullyQualifiedTable, List<XmlElement>>();
     }
 
