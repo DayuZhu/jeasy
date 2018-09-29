@@ -137,7 +137,7 @@ public class LimitForMysqlPagePlugin extends PluginAdapter {
                 Element element2 = new Element() {
                     @Override
                     public String getFormattedContent(int indentLevel) {
-                        return "\t) a, " + fqt.getFullyQualifiedTableNameAtRuntime() + " t\n" +
+                        return "\t ) a, " + fqt.getFullyQualifiedTableNameAtRuntime() + " t\n" +
                                 "\t where a." + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName()
                                 + " = t." + introspectedTable.getPrimaryKeyColumns().get(0).getActualColumnName() + "";
                     }
