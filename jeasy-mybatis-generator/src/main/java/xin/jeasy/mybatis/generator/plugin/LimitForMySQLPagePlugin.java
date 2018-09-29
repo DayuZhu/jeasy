@@ -23,7 +23,6 @@ import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 
-//import com.dayu.jeasy.utils.mapper.JsonMapper;
 
 public class LimitForMySQLPagePlugin extends PluginAdapter {
 
@@ -80,7 +79,6 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
      */
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
-        //System.out.println(JsonMapper.INSTANCE.toJson(document));
         List<XmlElement> elements = elementsToAdd.get(introspectedTable.getFullyQualifiedTable());
         if (elements != null) {
             for (XmlElement element : elements) {
@@ -93,9 +91,6 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
 
     /**
      * Use the method copy constructor to create a new method
-     *
-     * @param fullyQualifiedTable the table
-     * @param method              the method
      */
     private void copyAndAddMethod(Method method, Interface interfaze) {
         Method newMethod = new Method(method);
@@ -105,9 +100,6 @@ public class LimitForMySQLPagePlugin extends PluginAdapter {
 
     /**
      * Use the method copy constructor to create a new element
-     *
-     * @param fullyQualifiedTable the table
-     * @param method              the method
      */
     private void copyAndSaveElement(XmlElement element, FullyQualifiedTable fqt) {
         XmlElement newElement = new XmlElement(element);
