@@ -1,6 +1,6 @@
 # jeasy-mybatis-generator源码生成插件
   jeasy-mybatis-generator以mybatis-generator为基础扩展插件，目前扩展了分页插件和模板插件
-## test中的代码结构，可以直接运行测试
+## test包中的代码结构，可以直接运行测试
 
 
 ## 分页插件使用
