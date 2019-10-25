@@ -23,6 +23,7 @@ public class RemarksCommentGenerator extends DefaultCommentGenerator {
         topLevelClass.addJavaDocLine(" */");
     }
 
+    @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable,
                                 IntrospectedColumn introspectedColumn) {
         String remark = introspectedColumn.getRemarks();

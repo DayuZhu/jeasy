@@ -24,7 +24,7 @@ import ch.qos.logback.core.joran.spi.JoranException;
 public class MySQLLimitPluginTests {
 
 	static {
-		String logbackXml = "E:\\Users\\Dayu\\IdeaProjects\\jeasy\\jeasy-mybatis-generator\\src\\test\\resources\\logback.xml";
+		String logbackXml = "D:\\Dayu\\idea\\jeasy\\jeasy-mybatis-generator\\src\\test\\resources\\logback.xml";
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		JoranConfigurator configurator = new JoranConfigurator();
 		configurator.setContext(lc);
@@ -43,7 +43,7 @@ public class MySQLLimitPluginTests {
 		LOG.info("测试 test01");
 		try {
 			System.out.println("start generator ...");
-			List<String> warnings = new ArrayList<String>();
+			List<String> warnings = new ArrayList<>();
 			boolean overwrite = true;
 			ConfigurationParser cp = new ConfigurationParser(warnings);
 			Configuration config = cp.parseConfiguration(Resources.getResource("generatorConfig.xml").openStream());

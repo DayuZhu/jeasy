@@ -6,12 +6,12 @@
 
     <context id="mybatis" defaultModelType="flat" targetRuntime="MyBatis3">
 
-
+        <property name="autoDelimitKeywords" value="true"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
         <plugin
-                type="xin.jeasy.mybatis.generator.plugin.LimitForMySQLPagePlugin"/>
+                type="xin.jeasy.mybatis.generator.plugin.LimitForMysqlPagePlugin"/>
 
 
         <plugin
@@ -116,8 +116,8 @@
         <!--</jdbcConnection>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.93.137.244:33061/zkt_weekend?tinyInt1isBit=false"
-                        userId="diaomingkai" password="QqWWs4umCaZrkp4w">
+                        connectionURL="jdbc:mysql://47.93.137.244:33061/zkt_idis?tinyInt1isBit=false"
+                        userId="zkt_dev" password="zkT_Dev9827-LcL">
         </jdbcConnection>
         <javaModelGenerator
                 targetPackage="xin.jeasy.mybatis.generator.tests.pojo"
@@ -130,14 +130,13 @@
                          targetProject="src\test\resources"/>
 
         <javaClientGenerator
-                targetPackage="xin。jeasy.mybatis.generator.tests.mapper"
+                targetPackage="xin.jeasy.mybatis.generator.tests.mapper"
                 targetProject="src\test\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="dayu_test_member_merge_log" domainObjectName="DayuTestMemberMergeLog"
-               delimitIdentifiers="true">
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+        <table tableName="idis_pre_stored_info" domainObjectName="PreStoredInfo">
+            <generatedKey column="pre_stored_info_id" sqlStatement="MySql" identity="true" />
         </table>
 
     </context>
