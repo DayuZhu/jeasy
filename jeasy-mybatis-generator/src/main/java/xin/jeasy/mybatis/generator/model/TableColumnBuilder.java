@@ -61,7 +61,7 @@ public class TableColumnBuilder {
         tableClass.setBaseFields(baseFields);
         tableClass.setBlobFields(blobFields);
         tableClass.setAllFields(allFields);
-
+        tableClass.setTableComment(introspectedTable.getRemarks());
         return tableClass;
     }
 

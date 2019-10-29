@@ -18,7 +18,7 @@
             <property name="targetProject" value="src/test/java"/>
             <property name="targetPackage"
                       value="com.zkt.idis.svc.controller.merchant"/>
-            <property name="templatePath" value="adzTemplates/controller.ftl"/>
+            <property name="templatePath" value="adzTemplates/AdzController.ftl"/>
             <property name="templateFormatter"
                       value="xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter"/>
             <property name="mapperSuffix" value="Controller"/>
@@ -42,6 +42,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://47.93.137.244:33061/zkt_idis?tinyInt1isBit=false"
                         userId="zkt_dev" password="zkT_Dev9827-LcL">
+            <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
 
@@ -66,7 +67,7 @@
         </javaClientGenerator>
 
         <table tableName="idis_pre_stored_info" domainObjectName="PreStoredInfo">
-            <generatedKey column="pre_stored_info_id" sqlStatement="MySql" identity="true" />
+            <generatedKey column="pre_stored_info_id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>

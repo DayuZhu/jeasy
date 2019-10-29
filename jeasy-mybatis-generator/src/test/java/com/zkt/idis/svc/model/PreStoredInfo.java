@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @表名 idis_pre_stored_info
  * @日期 2019-10-29
- * @作者 generator 
+ * @作者 generator-code 
  * @修改人  
  */
 public class PreStoredInfo implements Serializable {
