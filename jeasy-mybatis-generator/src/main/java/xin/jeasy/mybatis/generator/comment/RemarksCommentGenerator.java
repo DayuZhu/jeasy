@@ -40,6 +40,8 @@ public class RemarksCommentGenerator extends DefaultCommentGenerator {
         }
         String defaultValue = introspectedColumn.getDefaultValue();
         remark += null != defaultValue ? "  (默认值为: " + defaultValue + ")" : " (无默认值)";
-        field.addJavaDocLine("/** " + remark + " */");
+        field.addJavaDocLine("/** ");
+        field.addJavaDocLine(" * " + remark);
+        field.addJavaDocLine(" */");
     }
 }
