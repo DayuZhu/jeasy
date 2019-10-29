@@ -3,25 +3,41 @@ package com.zkt.idis.svc.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @表名 idis_pre_stored_info
+ * @日期 2019-10-29
+ * @作者 generator 
+ * @修改人  
+ */
 public class PreStoredInfo implements Serializable {
+    /** 主键id (主健ID) (无默认值) */
     private Integer preStoredInfoId;
 
+    /** 预存信息主键(必填项)  (默认值为: 0) */
     private Integer relationId;
 
+    /** 0-其他 1-商户创建信息(必填项)  (默认值为: 0) */
     private Integer relationType;
 
+    /** 预存信息类型描述 例:草稿-商户创建信息(必填项)  (默认值为: ) */
     private String relationTypeDesc;
 
+    /** 预存内容主题(必填项)  (默认值为: ) */
     private String title;
 
+    /** 创建时间(必填项)  (默认值为: CURRENT_TIMESTAMP) */
     private Date createTime;
 
+    /** 更新时间(必填项)  (默认值为: CURRENT_TIMESTAMP) */
     private Date updateTime;
 
+    /** 操作人id(必填项)  (默认值为: 0) */
     private Integer userId;
 
+    /** 操作人名称(必填项)  (默认值为: ) */
     private String userName;
 
+    /** 预存内容(必填项) (无默认值) */
     private String content;
 
     private static final long serialVersionUID = 1L;

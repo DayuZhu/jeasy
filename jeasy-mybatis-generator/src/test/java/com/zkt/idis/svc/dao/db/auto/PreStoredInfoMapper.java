@@ -2,9 +2,8 @@ package com.zkt.idis.svc.dao.db.auto;
 
 import com.zkt.idis.svc.model.PreStoredInfo;
 import com.zkt.idis.svc.model.PreStoredInfoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface PreStoredInfoMapper {
     long countByExample(PreStoredInfoExample example);
