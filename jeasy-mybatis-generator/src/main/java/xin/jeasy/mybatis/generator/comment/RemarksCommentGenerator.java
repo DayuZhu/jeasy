@@ -18,7 +18,7 @@ public class RemarksCommentGenerator extends DefaultCommentGenerator {
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * @表名 " + introspectedTable.getFullyQualifiedTable());
         topLevelClass.addJavaDocLine(" * @日期 " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        topLevelClass.addJavaDocLine(" * @作者 generator ");
+        topLevelClass.addJavaDocLine(" * @作者 generator-code ");
         topLevelClass.addJavaDocLine(" * @修改人  ");
         topLevelClass.addJavaDocLine(" */");
     }
