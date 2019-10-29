@@ -1,135 +1,83 @@
-<#assign dateTime = .now>
-package ${package};
+package com.zkt.idis.svc.controller.merchant;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.zkt.common.model.AjaxResult;
+import com.zkt.idis.common.dto.request.PreStoredInfoDtoRequest;
+import com.zkt.idis.common.dto.request.PreStoredInfoListDtoRequest;
+import com.zkt.idis.common.dto.response.PageResponse;
+import com.zkt.idis.common.dto.response.PreStoredInfoContentDtoResponse;
+import com.zkt.idis.common.dto.response.PreStoredInfoDtoResponse;
+import com.zkt.idis.svc.service.PreStoredInfoService;
+import com.zkt.log.LogUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import ${projectPackage}.service.${tableClass.shortClassName}Service;
-import ${projectPackage}.pojo.${tableClass.shortClassName};
-import com.dayu.commons.utils2.collection.ListUtil;
-import com.dayu.commons.beans.page.PageListResult;
-import com.dayu.commons.beans.page.Pagenation;
-import com.dayu.commons.beans.page.PageView;
-import com.dayu.commons.beans.page.PagingQuery;
-import com.dayu.commons.beans.vo.ResponseVo;
-import com.dayu.commons.beans.controller.BaseController;
-
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
- * ${tableClass.shortClassName}${mapperSuffix}
+ * 功能描述:
  *
- * @mbg.generated
- * @author 
- * @since ${dateTime?date}
+ * @className:PreStoredInfoController
+ * @projectName:20190808-idis-svc
+ * @author:Dayu
+ * @date: 2019/10/24 14:18
  */
-@Controller
-@RequestMapping("/${tableClass.variableName?lower_case}")
-public class ${tableClass.shortClassName}${mapperSuffix} extends BaseController {
-	private static final Logger LOG = LoggerFactory.getLogger(${tableClass.shortClassName}${mapperSuffix}.class);
-	
-	private static final String BASE_PATH = "/${tableClass.variableName?lower_case}/";
-	private static final String HTML_PATH = "/html" + BASE_PATH;
-	private static final String JSP_PATH = "/table" + BASE_PATH;
-	
-	@Autowired
-	private ${tableClass.shortClassName}Service ${tableClass.variableName}Service;
+@RestController
+@RequestMapping(value = "/mis/pre/stored")
+@Api(tags = "预存信息控制类")
+@Validated
+public class PreStoredInfoController {
 
-	/** 页面跳转 */
-	@RequestMapping(value = "/forward")
-	public String forward(String path) {
-		LOG.info("forward:path={}", path);
-		if (StringUtils.isBlank(path)) {
-			return null;
-		}
+    @Autowired
+    private PreStoredInfoService preStoredInfoService;
 
-		if (path.endsWith(".html")) {
-			return "redirect:" + HTML_PATH + path;
-		} else {
-			return JSP_PATH + path;
-		}
-	}
+    @ApiOperation("创建或更新预存信息")
+    @PostMapping("/createOrModify")
+    public AjaxResult creationOrModify(@RequestBody @Valid PreStoredInfoDtoRequest preStoredInfoDtoRequest) {
+        LogUtil.logApplicationInfo("创建或更新预存信息请求参数" + preStoredInfoDtoRequest.toString());
+        AjaxResult result = new AjaxResult();
+        if (null != preStoredInfoDtoRequest.getPreStoredInfoId()) {
+            preStoredInfoService.updatePreStoredInfo(preStoredInfoDtoRequest);
+        } else {
+            preStoredInfoService.insertPreStoredInfo(preStoredInfoDtoRequest);
+        }
+        result.setMessage("操作成功");
+        return result;
+    }
 
-	@RequestMapping(value = "/")
-	public String index() {
-		return "redirect:" + HTML_PATH + "list.html";
-	}
+    @ApiOperation("查询预存信息")
+    @GetMapping("/query/info")
+    public AjaxResult<PreStoredInfoContentDtoResponse> queryInfo(@NotNull @RequestParam(name = "preStoredInfoId") Integer preStoredInfoId) {
+    LogUtil.logApplicationInfo("查询预存信息请求参数preStoredInfoId=" + preStoredInfoId);
+    AjaxResult<PreStoredInfoContentDtoResponse> result = new AjaxResult<>();
+        PreStoredInfoContentDtoResponse preStoredInfoContentDtoResponse =
+        preStoredInfoService.selectPreStoredInfoContent(preStoredInfoId);
+        result.setMessage("操作成功");
+        result.setData(preStoredInfoContentDtoResponse);
+        return result;
+        }
 
-	@RequestMapping(value = "/list")
-	@ResponseBody
-	public PageView<${tableClass.shortClassName}> list(PagingQuery<${tableClass.shortClassName}> record, Integer page, Integer rows) {
-		LOG.info("list?record={}", record.toString());
-		PageView<${tableClass.shortClassName}> pageView = null;
-		record.setPageNo(page == null ? 1 : page);
-		record.setPageSize(rows == null ? 10 : rows);
-		PageListResult<${tableClass.shortClassName}> rs = ${tableClass.variableName}Service.selectByExampleWithLimit(record);
-		Pagenation pg = rs.getPagenation();
-		List<${tableClass.shortClassName}> list = null;
-		if (ListUtil.isNotEmpty(rs.getValues())) {
-			list = rs.getValues();
-		} else {
-			list = new ArrayList<>();
-		}
-		pageView = new PageView<${tableClass.shortClassName}>(list, pg);
-		return pageView;
-	}	
-	
-    @RequestMapping(value = "/view")
-	@ResponseBody
-	public ResponseVo<${tableClass.shortClassName}> view(String busID) {
-		LOG.info("view?busID={}", busID);
-		${tableClass.shortClassName} ${tableClass.variableName} = ${tableClass.variableName}Service.selectEntityByBusID(busID);
-		return this.success(smsTest);
-	}
-	
-	@RequestMapping(value = "/add")
-	@ResponseBody
-	public ResponseVo<?> add(${tableClass.shortClassName} ${tableClass.variableName}) {
-		LOG.info("add={}", ${tableClass.variableName}.toString());
-		int i = ${tableClass.variableName}Service.insertSelective(${tableClass.variableName});
-		if (i == 0) {
-			return this.failure();
-		}
-		return this.success();
-	}	
+        @ApiOperation("查询预存信息列表")
+        @PostMapping("/query/info/list")
+        public AjaxResult<PageResponse<PreStoredInfoDtoResponse>> queryInfoList(@RequestBody @Valid PreStoredInfoListDtoRequest preStoredInfoListDtoRequest) {
+            LogUtil.logApplicationInfo("查询预存信息列表请求参数" + preStoredInfoListDtoRequest.toString());
+            AjaxResult<PageResponse<PreStoredInfoDtoResponse>> result = new AjaxResult<>();
+                PageResponse<PreStoredInfoDtoResponse> response = preStoredInfoService.selectPreStoredInfo(preStoredInfoListDtoRequest);
+                    result.setMessage("操作成功");
+                    result.setData(response);
+                    return result;
+                    }
 
-	@RequestMapping(value = "/edit")
-	@ResponseBody
-	public ResponseVo<?> edit(${tableClass.shortClassName} ${tableClass.variableName}) {
-		LOG.info("edit={}", ${tableClass.variableName}.toString());
-		if (StringUtils.isBlank(${tableClass.variableName}.getBusId())) {
-			return this.failure("业务ID不为空");
-		}
-		int i = ${tableClass.variableName}Service.selectCountByExample(${tableClass.variableName}.getBusId());
-		if (i == 0) {
-			return this.failure("未查询到要更新的数据!");
-		}
-		if (i != 1) {
-			return this.failure("不支持多条更新!");
-		}
-		int u = ${tableClass.variableName}Service.updateByExampleSelective(${tableClass.variableName});
-		if (u != 1) {
-			return this.failure();
-		}
-		return this.success();
-	}
-
-	@RequestMapping(value = "/delete")
-	@ResponseBody
-	public ResponseVo<?> delete(String busID) {
-		LOG.info("delete?busID={}", busID);
-		int i = ${tableClass.variableName}Service.deleteByExample(busID);
-		if (i != 1) {
-			return this.failure();
-		}
-		return this.success();
-	}
-
-}
+                    @ApiOperation("删除预存信息")
+                    @GetMapping("/del/info")
+                    public AjaxResult deleteInfo(@NotNull @RequestParam(name = "preStoredInfoId") Integer preStoredInfoId) {
+                    LogUtil.logApplicationInfo("删除预存信息请求参数preStoredInfoId=" + preStoredInfoId);
+                    AjaxResult result = new AjaxResult<>();
+                    preStoredInfoService.deletePreStoredInfo(preStoredInfoId);
+                    result.setMessage("操作成功");
+                    return result;
+                    }
+                    }
