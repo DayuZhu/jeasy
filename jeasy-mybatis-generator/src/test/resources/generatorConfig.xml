@@ -11,17 +11,19 @@
         <property name="endingDelimiter" value="`"/>
 
 
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
         <plugin
                 type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
             <property name="targetProject" value="src/test/java"/>
             <property name="targetPackage"
-                      value="xin.jeasy.mybatis.generator.tests.web.controller"/>
-            <property name="templatePath" value="templates/controller.ftl"/>
+                      value="com.zkt.idis.svc.controller.merchant"/>
+            <property name="templatePath" value="adzTemplates/controller.ftl"/>
             <property name="templateFormatter"
                       value="xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter"/>
             <property name="mapperSuffix" value="Controller"/>
             <property name="projectPackage"
-                      value="xin.jeasy.mybatis.generator.tests"/>
+                      value="com.zkt.idis.svc"/>
             <property name="fileName"
                       value="${tableClass.shortClassName}${mapperSuffix}.java"/>
         </plugin>
@@ -41,18 +43,24 @@
                         connectionURL="jdbc:mysql://47.93.137.244:33061/zkt_idis?tinyInt1isBit=false"
                         userId="zkt_dev" password="zkT_Dev9827-LcL">
         </jdbcConnection>
+
+
+        <javaTypeResolver type="zkt.mybatis.generator.junit.MyFullyQualifiesJavaType">
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
         <javaModelGenerator
-                targetPackage="xin.jeasy.mybatis.generator.tests.pojo"
+                targetPackage="com.zkt.idis.svc.model"
                 targetProject="src\test\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="db/mapper"
+        <sqlMapGenerator targetPackage="mappings/auto"
                          targetProject="src\test\resources"/>
 
         <javaClientGenerator
-                targetPackage="xin.jeasy.mybatis.generator.tests.mapper"
+                targetPackage="com.zkt.idis.svc.dao.db.auto"
                 targetProject="src\test\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
