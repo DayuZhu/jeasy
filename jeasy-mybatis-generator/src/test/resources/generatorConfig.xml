@@ -12,6 +12,8 @@
 
 
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--覆盖生成XML文件-->
+        <plugin type="zkt.mybatis.generator.junit.UnmergeableXmlMappersPlugin" />
 
         <plugin
                 type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
