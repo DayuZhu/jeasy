@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss zzzz")}
  */
 @RestController
-@RequestMapping(value = "/mis<#list tableClass.tableName?split("_") as uri><#if uri_index != 0>/${uri}</#if></#list>")
+@RequestMapping(value = "/mis<#list tableClass.tableName?split("_") as uri><#if uri_index != 0 && uri != 'info'>/${uri}</#if></#list>")
 @Api(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类", tags = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类")
 @Validated
 public class ${tableClass.shortClassName}Controller {
@@ -36,7 +36,7 @@ public class ${tableClass.shortClassName}Controller {
     private ${tableClass.shortClassName}Service ${tableClass.variableName}Service;
 
     @ApiOperation("创建或更新${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}")
-    @PostMapping("/createOrModify")
+    @PostMapping("/create_modify")
     public AjaxResult creationOrModify(@RequestBody @Valid ${tableClass.shortClassName}DtoRequest ${tableClass.variableName}DtoRequest) {
         LogUtil.logApplicationInfo("创建或更新${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}请求参数" + ${tableClass.variableName}DtoRequest.toString());
         AjaxResult result = new AjaxResult();
