@@ -40,6 +40,9 @@ import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
  *      &lt;property name="templateFormatter" value="xxx.FreemarkerTemplateFormatter"/&gt;
  * &lt;/plugin&gt;
  * </pre>
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
 public class TemplateFilePlugin extends PluginAdapter {
     /**

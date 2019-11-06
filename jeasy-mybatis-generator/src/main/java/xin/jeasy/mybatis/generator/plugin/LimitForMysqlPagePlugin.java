@@ -20,7 +20,11 @@ import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.*;
 
-
+/**
+ * @projectName:jeasy01
+ * @author:Dayu
+ * @date:
+ */
 public class LimitForMysqlPagePlugin extends PluginAdapter {
 
     private Map<FullyQualifiedTable, List<XmlElement>> elementsToAdd;

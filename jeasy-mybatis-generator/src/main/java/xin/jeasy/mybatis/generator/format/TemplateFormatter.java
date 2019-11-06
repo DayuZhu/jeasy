@@ -5,7 +5,9 @@ import java.util.Properties;
 import xin.jeasy.mybatis.generator.model.TableClass;
 
 /**
- *
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
 public interface TemplateFormatter {
 

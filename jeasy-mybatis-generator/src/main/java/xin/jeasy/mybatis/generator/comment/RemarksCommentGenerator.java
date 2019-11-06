@@ -11,6 +11,11 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
 import org.mybatis.generator.internal.util.StringUtility;
 
+/**
+ * @projectName:jeasy01
+ * @author:
+ * @date:
+ */
 public class RemarksCommentGenerator extends DefaultCommentGenerator {
 
     @Override

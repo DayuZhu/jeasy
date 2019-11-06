@@ -16,73 +16,66 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
 /**
- * 基于 freemarker 的实现
+ * 功能描述:基于 freemarker 的实现
  *
+ * @className:FreemarkerTemplateFormatter
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
 public class FreemarkerTemplateFormatter implements TemplateFormatter, ListTemplateFormatter {
-	private final Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
-	private final StringTemplateLoader templateLoader = new StringTemplateLoader();
+    private static final Configuration CONFIGURATION = new Configuration(Configuration.VERSION_2_3_23);
+    private static final StringTemplateLoader TEMPLATELOADER = new StringTemplateLoader();
 
-	public FreemarkerTemplateFormatter() {
-		configuration.setLocale(Locale.CHINA);
-		configuration.setDefaultEncoding("UTF-8");
-		configuration.setTemplateLoader(templateLoader);
-		configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_23));
-	}
+    public FreemarkerTemplateFormatter() {
+        CONFIGURATION.setLocale(Locale.CHINA);
+        CONFIGURATION.setDefaultEncoding("UTF-8");
+        CONFIGURATION.setTemplateLoader(TEMPLATELOADER);
+        CONFIGURATION.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_23));
+    }
 
-	/**
-	 * 根据模板处理
-	 *
-	 * @param templateName
-	 * @param templateSource
-	 * @param params
-	 * @return
-	 */
-	public String process(String templateName, String templateSource, Map<String, Object> params) {
-		try {
-			Template template = new Template(templateName, templateSource, configuration);
-			Writer writer = new StringWriter();
-			template.process(params, writer);
-			return writer.toString();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    /**
+     * 根据模板处理
+     *
+     * @param templateName
+     * @param templateSource
+     * @param params
+     * @return
+     */
+    public String process(String templateName, String templateSource, Map<String, Object> params) {
+        try {
+            Template template = new Template(templateName, templateSource, CONFIGURATION);
+            Writer writer = new StringWriter();
+            template.process(params, writer);
+            return writer.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	@Override
-	public String getFormattedContent(TableClass tableClass, Properties properties, String targetPackage,
-			String templateContent) {
-		Map<String, Object> params = new HashMap<>();
-		for (Object o : properties.keySet()) {
-			params.put(String.valueOf(o), properties.get(o));
-		}
-		params.put("props", properties);
-		params.put("package", targetPackage);
-		params.put("tableClass", tableClass);
+    @Override
+    public String getFormattedContent(TableClass tableClass, Properties properties, String targetPackage,
+                                      String templateContent) {
+        Map<String, Object> params = new HashMap<>(16);
+        for (Object o : properties.keySet()) {
+            params.put(String.valueOf(o), properties.get(o));
+        }
+        params.put("props", properties);
+        params.put("package", targetPackage);
+        params.put("tableClass", tableClass);
+        return process(properties.getProperty("templatePath"), templateContent, params);
+    }
 
-		// zhuxiaoyu added 20180322 begin
-		/*
-		 * List<String> uFieldNames = new ArrayList<>(); List<String> fieldNames = new
-		 * ArrayList<>(); tableClass.getBaseFields().forEach((columnField) -> { String
-		 * str = columnField.getFieldName(); fieldNames.add(str);
-		 * str.replace(str.substring(0, 1), str.substring(0, 1).toUpperCase());
-		 * uFieldNames.add(str); }); params.put("uFieldNames", uFieldNames);
-		 * params.put("fieldNames", fieldNames);
-		 */
-		// end
-		return process(properties.getProperty("templatePath"), templateContent, params);
-	}
-
-	@Override
-	public String getFormattedContent(Set<TableClass> tableClassSet, Properties properties, String targetPackage,
-			String templateContent) {
-		Map<String, Object> params = new HashMap<>();
-		for (Object o : properties.keySet()) {
-			params.put(String.valueOf(o), properties.get(o));
-		}
-		params.put("props", properties);
-		params.put("package", targetPackage);
-		params.put("tableClassSet", tableClassSet);
-		return process(properties.getProperty("templatePath"), templateContent, params);
-	}
+    @Override
+    public String getFormattedContent(Set<TableClass> tableClassSet, Properties properties, String targetPackage,
+                                      String templateContent) {
+        Map<String, Object> params = new HashMap<>(16);
+        for (Object o : properties.keySet()) {
+            params.put(String.valueOf(o), properties.get(o));
+        }
+        params.put("props", properties);
+        params.put("package", targetPackage);
+        params.put("tableClassSet", tableClassSet);
+        return process(properties.getProperty("templatePath"), templateContent, params);
+    }
 }

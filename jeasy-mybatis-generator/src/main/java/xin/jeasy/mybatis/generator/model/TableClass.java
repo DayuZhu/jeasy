@@ -3,14 +3,15 @@ package xin.jeasy.mybatis.generator.model;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 
-import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
- *
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
-public class TableClass implements Serializable {
-    private static final long serialVersionUID = -746251813735169289L;
+public class TableClass {
 
     private IntrospectedTable introspectedTable;
 
@@ -130,5 +131,30 @@ public class TableClass implements Serializable {
 
     public void setTableComment(String tableComment) {
         this.tableComment = tableComment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableClass that = (TableClass) o;
+        return Objects.equals(introspectedTable, that.introspectedTable) &&
+                Objects.equals(tableName, that.tableName) &&
+                Objects.equals(tableComment, that.tableComment) &&
+                Objects.equals(variableName, that.variableName) &&
+                Objects.equals(lowerCaseName, that.lowerCaseName) &&
+                Objects.equals(shortClassName, that.shortClassName) &&
+                Objects.equals(fullClassName, that.fullClassName) &&
+                Objects.equals(packageName, that.packageName) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(pkFields, that.pkFields) &&
+                Objects.equals(baseFields, that.baseFields) &&
+                Objects.equals(blobFields, that.blobFields) &&
+                Objects.equals(allFields, that.allFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(introspectedTable, tableName, tableComment, variableName, lowerCaseName, shortClassName, fullClassName, packageName, type, pkFields, baseFields, blobFields, allFields);
     }
 }

@@ -9,7 +9,9 @@ import xin.jeasy.mybatis.generator.format.TemplateFormatter;
 import xin.jeasy.mybatis.generator.model.TableClass;
 
 /**
- *
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
 public class GenerateByTemplateFile extends GeneratedJavaFile {
     public static final String ENCODING = "UTF-8";

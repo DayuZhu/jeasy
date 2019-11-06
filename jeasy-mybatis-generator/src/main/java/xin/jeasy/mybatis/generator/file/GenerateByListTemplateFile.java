@@ -10,7 +10,9 @@ import xin.jeasy.mybatis.generator.format.ListTemplateFormatter;
 import xin.jeasy.mybatis.generator.model.TableClass;
 
 /**
- *
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
 public class GenerateByListTemplateFile extends GeneratedJavaFile {
     public static final String ENCODING = "UTF-8";

@@ -2,14 +2,13 @@ package xin.jeasy.mybatis.generator.model;
 
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 
-import java.io.Serializable;
-
 /**
- *
+ * @projectName:jeasy01
+ * @author:
+ * @date:
  */
-public class ColumnField implements Serializable {
+public class ColumnField {
 
-    private static final long serialVersionUID = -435113788623615260L;
     private TableClass tableClass;
     private String columnName;
     private String jdbcType;
