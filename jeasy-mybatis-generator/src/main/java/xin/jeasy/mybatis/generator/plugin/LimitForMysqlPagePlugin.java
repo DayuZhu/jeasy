@@ -30,7 +30,7 @@ public class LimitForMysqlPagePlugin extends PluginAdapter {
     private Map<FullyQualifiedTable, List<XmlElement>> elementsToAdd;
 
     public LimitForMysqlPagePlugin() {
-        elementsToAdd = new HashMap<FullyQualifiedTable, List<XmlElement>>();
+        elementsToAdd = new HashMap<>();
     }
 
     @Override
@@ -156,7 +156,7 @@ public class LimitForMysqlPagePlugin extends PluginAdapter {
         // later
         List<XmlElement> elements = elementsToAdd.get(fqt);
         if (elements == null) {
-            elements = new ArrayList<XmlElement>();
+            elements = new ArrayList<>();
             elementsToAdd.put(fqt, elements);
         }
         elements.add(newElement);

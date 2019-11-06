@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
@@ -40,15 +41,23 @@ import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
  *      &lt;property name="templateFormatter" value="xxx.FreemarkerTemplateFormatter"/&gt;
  * &lt;/plugin&gt;
  * </pre>
+ *
  * @projectName:jeasy01
  * @author:
  * @date:
  */
 public class TemplateFilePlugin extends PluginAdapter {
+
+    /**
+     * 字符TRUE
+     */
+    private static final String BOOLEAN_TRUE = "TRUE";
+
     /**
      * 默认的模板格式化类
      */
-    public static final String DEFAULT_TEMPLATEFORMATTER = "xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter";
+    private static final String DEFAULT_TEMPLATEFORMATTER
+            = "xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter";
     /**
      * 单个文件模式
      */
@@ -177,7 +186,7 @@ public class TemplateFilePlugin extends PluginAdapter {
     public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
         List<GeneratedJavaFile> list = new ArrayList<>();
         TableClass tableClass = TableColumnBuilder.build(introspectedTable);
-        if ("TRUE".equalsIgnoreCase(singleMode)) {
+        if (BOOLEAN_TRUE.equalsIgnoreCase(singleMode)) {
             list.add(new GenerateByTemplateFile(tableClass, (TemplateFormatter) templateFormatter, properties, targetProject, targetPackage, fileName, templateContent));
         } else {
             cacheTables.add(tableClass);
@@ -188,8 +197,15 @@ public class TemplateFilePlugin extends PluginAdapter {
     @Override
     public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles() {
         List<GeneratedJavaFile> list = new ArrayList<>();
-        if (cacheTables != null && cacheTables.size() > 0) {
-            list.add(new GenerateByListTemplateFile(cacheTables, (ListTemplateFormatter) templateFormatter, properties, targetProject, targetPackage, fileName, templateContent));
+        if (CollectionUtils.isNotEmpty(cacheTables)) {
+            list.add(new GenerateByListTemplateFile(
+                    cacheTables,
+                    (ListTemplateFormatter) templateFormatter,
+                    properties,
+                    targetProject,
+                    targetPackage,
+                    fileName,
+                    templateContent));
         }
         return list;
     }
@@ -197,9 +213,9 @@ public class TemplateFilePlugin extends PluginAdapter {
     @Override
     public void setProperties(Properties properties) {
         super.setProperties(properties);
-        this.singleMode = properties.getProperty("singleMode", "true");
-        if (!"TRUE".equalsIgnoreCase(singleMode)) {
-            this.cacheTables = new LinkedHashSet<TableClass>();
+        this.singleMode = properties.getProperty("singleMode", BOOLEAN_TRUE);
+        if (!BOOLEAN_TRUE.equalsIgnoreCase(singleMode)) {
+            this.cacheTables = new LinkedHashSet<>();
         }
         this.targetProject = properties.getProperty("targetProject");
         this.targetPackage = properties.getProperty("targetPackage");
