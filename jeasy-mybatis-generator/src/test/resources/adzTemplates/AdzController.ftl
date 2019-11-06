@@ -51,7 +51,7 @@ public class ${tableClass.shortClassName}Controller {
     }
 
     @ApiOperation("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}")
-    @GetMapping("/query/info")
+    @GetMapping("/info")
     public AjaxResult<${tableClass.shortClassName}ContentDtoResponse> queryInfo(@NotNull @RequestParam(name = "<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>") Integer <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>) {
         LogUtil.logApplicationInfo("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}请求参数<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>=" + <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
         AjaxResult<${tableClass.shortClassName}ContentDtoResponse> result = new AjaxResult<>();
@@ -63,7 +63,7 @@ public class ${tableClass.shortClassName}Controller {
     }
 
     @ApiOperation("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}列表")
-    @PostMapping("/query/info/list")
+    @PostMapping("/info/list")
     public AjaxResult<PageResponse<${tableClass.shortClassName}DtoResponse>> queryInfoList(@RequestBody @Valid ${tableClass.shortClassName}ListDtoRequest ${tableClass.variableName}ListDtoRequest) {
         LogUtil.logApplicationInfo("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}列表请求参数" + ${tableClass.variableName}ListDtoRequest.toString());
         AjaxResult<PageResponse<${tableClass.shortClassName}DtoResponse>> result = new AjaxResult<>();
