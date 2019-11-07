@@ -22,6 +22,8 @@ import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.util.StringUtility;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xin.jeasy.mybatis.generator.file.GenerateByListTemplateFile;
 import xin.jeasy.mybatis.generator.file.GenerateByTemplateFile;
 import xin.jeasy.mybatis.generator.format.ListTemplateFormatter;
@@ -48,10 +50,17 @@ import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
  */
 public class TemplateFilePlugin extends PluginAdapter {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TemplateFilePlugin.class);
+
     /**
      * 字符TRUE
      */
     private static final String BOOLEAN_TRUE = "TRUE";
+
+    /**
+     * 错误数量2
+     */
+    private static final Integer ERROR_COUNT_2 = 2;
 
     /**
      * 默认的模板格式化类
@@ -114,24 +123,24 @@ public class TemplateFilePlugin extends PluginAdapter {
      */
     protected String read(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         String line = reader.readLine();
         while (line != null) {
-            stringBuffer.append(line).append("\n");
+            stringBuilder.append(line).append("\n");
             line = reader.readLine();
         }
-        return stringBuffer.toString();
+        return stringBuilder.toString();
     }
 
     @Override
     public boolean validate(List<String> warnings) {
         boolean right = true;
         if (!StringUtility.stringHasValue(fileName)) {
-            warnings.add("没有配置 \"fileName\" 文件名模板，因此不会生成任何额外代码!");
+            warnings.add("没有配置 fileName 文件名模板，因此不会生成任何额外代码!");
             right = false;
         }
         if (!StringUtility.stringHasValue(templatePath)) {
-            warnings.add("没有配置 \"templatePath\" 模板路径，因此不会生成任何额外代码!");
+            warnings.add("没有配置 templatePath 模板路径，因此不会生成任何额外代码!");
             right = false;
         } else {
             try {
@@ -139,7 +148,7 @@ public class TemplateFilePlugin extends PluginAdapter {
                 try {
                     resourceUrl = ObjectFactory.getResource(templatePath);
                 } catch (Exception e) {
-                    warnings.add("本地加载\"templatePath\" 模板路径失败，尝试 URL 方式获取!");
+                    warnings.add("本地加载templatePath模板路径失败，尝试 URL 方式获取!");
                 }
                 if (resourceUrl == null) {
                     resourceUrl = new URL(templatePath);
@@ -148,14 +157,14 @@ public class TemplateFilePlugin extends PluginAdapter {
                 templateContent = read(inputStream);
                 inputStream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("读取模板文件出错", e);
                 warnings.add("读取模板文件出错: " + e.getMessage());
                 right = false;
             }
         }
         if (!StringUtility.stringHasValue(templateFormatterClass)) {
             templateFormatterClass = DEFAULT_TEMPLATEFORMATTER;
-            warnings.add("没有配置 \"templateFormatterClass\" 模板处理器，使用默认的处理器!");
+            warnings.add("没有配置 templateFormatterClass 模板处理器，使用默认的处理器!");
         }
         try {
             templateFormatter = Class.forName(templateFormatterClass).newInstance();
@@ -169,13 +178,13 @@ public class TemplateFilePlugin extends PluginAdapter {
         int errorCount = 0;
         if (!StringUtility.stringHasValue(targetProject)) {
             errorCount++;
-            warnings.add("没有配置 \"targetProject\" 路径!");
+            warnings.add("没有配置 targetProject 路径!");
         }
         if (!StringUtility.stringHasValue(targetPackage)) {
             errorCount++;
-            warnings.add("没有配置 \"targetPackage\" 路径!");
+            warnings.add("没有配置 targetPackage 路径!");
         }
-        if (errorCount >= 2) {
+        if (errorCount >= ERROR_COUNT_2) {
             warnings.add("由于没有配置任何有效路径，不会生成任何额外代码!");
             return false;
         }
@@ -187,7 +196,9 @@ public class TemplateFilePlugin extends PluginAdapter {
         List<GeneratedJavaFile> list = new ArrayList<>();
         TableClass tableClass = TableColumnBuilder.build(introspectedTable);
         if (BOOLEAN_TRUE.equalsIgnoreCase(singleMode)) {
-            list.add(new GenerateByTemplateFile(tableClass, (TemplateFormatter) templateFormatter, properties, targetProject, targetPackage, fileName, templateContent));
+            list.add(new GenerateByTemplateFile(tableClass,
+                    (TemplateFormatter) templateFormatter,
+                    properties, targetProject, targetPackage, fileName, templateContent));
         } else {
             cacheTables.add(tableClass);
         }
