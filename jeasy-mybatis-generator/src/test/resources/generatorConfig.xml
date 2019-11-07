@@ -17,17 +17,20 @@
 
         <plugin
                 type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
-            <property name="targetProject" value="src/test/java"/>
-            <property name="targetPackage"
-                      value="com.zkt.idis.svc.controller.merchant"/>
-            <property name="templatePath" value="adzTemplates/AdzController.ftl"/>
-            <property name="templateFormatter"
-                      value="xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter"/>
-            <property name="mapperSuffix" value="Controller"/>
+
             <property name="projectPackage"
                       value="com.zkt.idis.svc"/>
+
+            <property name="targetProject" value="src/test/java"/>
+
+            <property name="targetPackage"
+                      value="com.zkt.idis.svc.controller.merchant"/>
+
+            <property name="templatePath" value="adzTemplates/AdzController.ftl"/>
+            <property name="mapperSuffix" value="Controller"/>
             <property name="fileName"
                       value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+
         </plugin>
 
         <commentGenerator>
