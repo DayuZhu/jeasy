@@ -1,27 +1,10 @@
 package xin.jeasy.mybatis.generator.plugin;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.mybatis.generator.api.GeneratedJavaFile;
-import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
-import org.mybatis.generator.internal.ObjectFactory;
 import org.mybatis.generator.internal.util.StringUtility;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xin.jeasy.mybatis.generator.file.GenerateByListTemplateFile;
@@ -30,37 +13,31 @@ import xin.jeasy.mybatis.generator.format.ListTemplateFormatter;
 import xin.jeasy.mybatis.generator.format.TemplateFormatter;
 import xin.jeasy.mybatis.generator.model.TableClass;
 import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
+import xin.jeasy.mybatis.generator.util.CommonUtility;
+
+import java.io.IOException;
+import java.util.*;
 
 /**
- * 每一个模板都需要配置一个插件，可以配置多个
- * <p>
- * <pre>
- * &lt;plugin type="xxx.TemplateFilePlugin"&gt;
- *      &lt;property name="targetProject"     value="src/main/java"/&gt;
- *      &lt;property name="targetPackage"     value="com.xxx.controller"/&gt;
- *      &lt;property name="templatePath"      value="template/controller.ftl"/&gt;
- *      &lt;property name="fileName"          value="XXXController.java"/&gt;
- *      &lt;property name="templateFormatter" value="xxx.FreemarkerTemplateFormatter"/&gt;
- * &lt;/plugin&gt;
- * </pre>
+ * 功能描述:
  *
+ * @className:TemplateFilePlugin
  * @projectName:jeasy01
- * @author:
+ * @author:Dayu
  * @date:
  */
+
 public class TemplateFilePlugin extends PluginAdapter {
 
+    /**
+     * 日志
+     */
     private static final Logger LOG = LoggerFactory.getLogger(TemplateFilePlugin.class);
 
     /**
      * 字符TRUE
      */
     private static final String BOOLEAN_TRUE = "TRUE";
-
-    /**
-     * 错误数量2
-     */
-    private static final Integer ERROR_COUNT_2 = 2;
 
     /**
      * 默认的模板格式化类
@@ -95,99 +72,65 @@ public class TemplateFilePlugin extends PluginAdapter {
      * 模板生成器
      */
     private Object templateFormatter;
+    /**
+     * 指定模板生成器
+     */
     private String templateFormatterClass;
+
+    /**
+     * 所有表字段存储
+     */
     private Set<TableClass> cacheTables;
-
-    /**
-     * 列转换为字段
-     *
-     * @param introspectedColumn
-     * @return
-     */
-    public static Field convertToJavaBeansField(IntrospectedColumn introspectedColumn) {
-        FullyQualifiedJavaType fqjt = introspectedColumn.getFullyQualifiedJavaType();
-        String property = introspectedColumn.getJavaProperty();
-        Field field = new Field();
-        field.setVisibility(JavaVisibility.PRIVATE);
-        field.setType(fqjt);
-        field.setName(property);
-        return field;
-    }
-
-    /**
-     * 读取文件
-     *
-     * @param inputStream
-     * @return
-     * @throws IOException
-     */
-    protected String read(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = reader.readLine();
-        while (line != null) {
-            stringBuilder.append(line).append("\n");
-            line = reader.readLine();
-        }
-        return stringBuilder.toString();
-    }
 
     @Override
     public boolean validate(List<String> warnings) {
-        boolean right = true;
         if (!StringUtility.stringHasValue(fileName)) {
+            LOG.error("没有配置 fileName 文件名模板，因此不会生成任何额外代码!");
             warnings.add("没有配置 fileName 文件名模板，因此不会生成任何额外代码!");
-            right = false;
+            return false;
         }
+
         if (!StringUtility.stringHasValue(templatePath)) {
+            LOG.error("没有配置 templatePath 模板路径，因此不会生成任何额外代码!");
             warnings.add("没有配置 templatePath 模板路径，因此不会生成任何额外代码!");
-            right = false;
-        } else {
-            try {
-                URL resourceUrl = null;
-                try {
-                    resourceUrl = ObjectFactory.getResource(templatePath);
-                } catch (Exception e) {
-                    warnings.add("本地加载templatePath模板路径失败，尝试 URL 方式获取!");
-                }
-                if (resourceUrl == null) {
-                    resourceUrl = new URL(templatePath);
-                }
-                InputStream inputStream = resourceUrl.openConnection().getInputStream();
-                templateContent = read(inputStream);
-                inputStream.close();
-            } catch (IOException e) {
-                LOG.error("读取模板文件出错", e);
-                warnings.add("读取模板文件出错: " + e.getMessage());
-                right = false;
-            }
+            return false;
         }
+
+        try {
+            templateContent = CommonUtility.getTemplateContent(templatePath);
+        } catch (IOException e) {
+            LOG.error("读取模板文件出错", e);
+            warnings.add("读取模板文件出错: " + e.getMessage());
+            return false;
+        }
+
         if (!StringUtility.stringHasValue(templateFormatterClass)) {
             templateFormatterClass = DEFAULT_TEMPLATEFORMATTER;
+            LOG.warn("没有配置 templateFormatterClass 模板处理器，使用默认的处理器!");
             warnings.add("没有配置 templateFormatterClass 模板处理器，使用默认的处理器!");
         }
+
         try {
             templateFormatter = Class.forName(templateFormatterClass).newInstance();
-        } catch (Exception e) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            LOG.error("初始化 templateFormatter 出错", e);
             warnings.add("初始化 templateFormatter 出错:" + e.getMessage());
-            right = false;
-        }
-        if (!right) {
             return false;
         }
-        int errorCount = 0;
+
+
         if (!StringUtility.stringHasValue(targetProject)) {
-            errorCount++;
+            LOG.error("没有配置 targetProject 路径!");
             warnings.add("没有配置 targetProject 路径!");
+            return false;
         }
         if (!StringUtility.stringHasValue(targetPackage)) {
-            errorCount++;
+            LOG.error("没有配置 targetPackage 路径!");
             warnings.add("没有配置 targetPackage 路径!");
-        }
-        if (errorCount >= ERROR_COUNT_2) {
-            warnings.add("由于没有配置任何有效路径，不会生成任何额外代码!");
             return false;
         }
+
+
         return true;
     }
 
