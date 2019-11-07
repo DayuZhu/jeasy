@@ -16,7 +16,7 @@
         <plugin type="zkt.mybatis.generator.junit.UnmergeableXmlMappersPlugin"/>
 
         <plugin
-                type="xin.jeasy.mybatis.generator.plugin.TemplateFileListPlugin">
+                type="xin.jeasy.mybatis.generator.plugin.TemplateFileMultiPlugin">
 
             <property name="projectPackage"
                       value="com.zkt.idis.svc"/>
@@ -30,6 +30,7 @@
                       value="
                       AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.merchant;
                       AdzDtoRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
+                      AdzListDtoRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       "/>
 
         </plugin>

@@ -19,7 +19,7 @@ import java.util.Date;
 </#list>
 
 @ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数")
-public class ${tableClass.shortClassName}DtoRequest extends BaseDto {
+public class ${tableClass.shortClassName}ListDtoRequest extends PageRequest {
 
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")
