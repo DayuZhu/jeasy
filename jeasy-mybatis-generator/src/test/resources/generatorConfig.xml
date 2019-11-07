@@ -13,23 +13,23 @@
 
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!--覆盖生成XML文件-->
-        <plugin type="zkt.mybatis.generator.junit.UnmergeableXmlMappersPlugin" />
+        <plugin type="zkt.mybatis.generator.junit.UnmergeableXmlMappersPlugin"/>
 
         <plugin
-                type="xin.jeasy.mybatis.generator.plugin.TemplateFilePlugin">
+                type="xin.jeasy.mybatis.generator.plugin.TemplateFileListPlugin">
 
             <property name="projectPackage"
                       value="com.zkt.idis.svc"/>
 
             <property name="targetProject" value="src/test/java"/>
+            <property name="templateRoot" value="adzTemplates/"/>
 
-            <property name="targetPackage"
-                      value="com.zkt.idis.svc.controller.merchant"/>
 
-            <property name="templatePath" value="adzTemplates/AdzController.ftl"/>
-            <property name="mapperSuffix" value="Controller"/>
-            <property name="fileName"
-                      value="${tableClass.shortClassName}${mapperSuffix}.java"/>
+            <!--templatePath-mapperSuffix-fileName-targetPackage;-->
+            <property name="templateInfo"
+                      value="
+                      AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.merchant;
+                      "/>
 
         </plugin>
 
