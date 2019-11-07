@@ -29,6 +29,7 @@
             <property name="templateInfo"
                       value="
                       AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.merchant;
+                      AdzDtoRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       "/>
 
         </plugin>
