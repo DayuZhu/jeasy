@@ -160,7 +160,7 @@ public class TemplateFileListPlugin extends PluginAdapter {
         this.templateFormatterClass = properties.getProperty("templateFormatter");
         String[] split = StringUtils.split(templateInfo, ";");
         for (String str : split) {
-            String[] info = StringUtils.split(str, "-");
+            String[] info = StringUtils.split(str.trim(), "-");
             TemplateInfo tInfo = new TemplateInfo();
             tInfo.setTemplatePath(templateRoot + info[0]);
             tInfo.setMapperSuffix(info[1]);
