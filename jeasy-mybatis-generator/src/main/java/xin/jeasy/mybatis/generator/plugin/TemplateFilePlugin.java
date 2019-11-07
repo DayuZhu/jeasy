@@ -96,6 +96,18 @@ public class TemplateFilePlugin extends PluginAdapter {
             return false;
         }
 
+
+        if (!StringUtility.stringHasValue(targetProject)) {
+            LOG.error("没有配置 targetProject 路径!");
+            warnings.add("没有配置 targetProject 路径!");
+            return false;
+        }
+        if (!StringUtility.stringHasValue(targetPackage)) {
+            LOG.error("没有配置 targetPackage 路径!");
+            warnings.add("没有配置 targetPackage 路径!");
+            return false;
+        }
+
         try {
             templateContent = CommonUtility.getTemplateContent(templatePath);
         } catch (IOException e) {
@@ -117,19 +129,6 @@ public class TemplateFilePlugin extends PluginAdapter {
             warnings.add("初始化 templateFormatter 出错:" + e.getMessage());
             return false;
         }
-
-
-        if (!StringUtility.stringHasValue(targetProject)) {
-            LOG.error("没有配置 targetProject 路径!");
-            warnings.add("没有配置 targetProject 路径!");
-            return false;
-        }
-        if (!StringUtility.stringHasValue(targetPackage)) {
-            LOG.error("没有配置 targetPackage 路径!");
-            warnings.add("没有配置 targetPackage 路径!");
-            return false;
-        }
-
 
         return true;
     }
