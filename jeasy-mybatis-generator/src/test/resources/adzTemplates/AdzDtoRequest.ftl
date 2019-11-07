@@ -3,8 +3,11 @@ package ${package};
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotBlank;
+<#list tableClass.allFields as fieldNames>
+    <#if fieldNames.shortTypeName == "Date">
+import java.util.Date;
+    </#if>
+</#list>
 
 @ApiModel(
         value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数",
@@ -15,10 +18,12 @@ public class ${tableClass.shortClassName}DtoRequest extends BaseDto {
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")
     private ${fieldNames.shortTypeName} ${fieldNames.fieldName};
+
 </#list>
 
 <#list tableClass.allFields as fieldNames>
-    public Integer get${fieldNames.fieldName?cap_first}() {
+
+    public ${fieldNames.shortTypeName} get${fieldNames.fieldName?cap_first}() {
         return this.${fieldNames.fieldName};
     }
 

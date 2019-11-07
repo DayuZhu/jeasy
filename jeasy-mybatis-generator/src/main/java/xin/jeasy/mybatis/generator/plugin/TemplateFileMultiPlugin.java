@@ -8,8 +8,8 @@ import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.internal.util.StringUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xin.jeasy.mybatis.generator.file.GenerateByTemplateFile;
-import xin.jeasy.mybatis.generator.format.TemplateFormatter;
+import xin.jeasy.mybatis.generator.file.GenerateByMultiTemplateFile;
+import xin.jeasy.mybatis.generator.format.TemplateMultiFormatter;
 import xin.jeasy.mybatis.generator.model.TableClass;
 import xin.jeasy.mybatis.generator.model.TableColumnBuilder;
 import xin.jeasy.mybatis.generator.model.TemplateInfo;
@@ -28,7 +28,7 @@ import java.util.Properties;
  * @author:Dayu
  * @date: 2019/11/7 15:03
  */
-public class TemplateFileListPlugin extends PluginAdapter {
+public class TemplateFileMultiPlugin extends PluginAdapter {
 
     /**
      * 日志
@@ -39,7 +39,7 @@ public class TemplateFileListPlugin extends PluginAdapter {
      * 默认的模板格式化类
      */
     private static final String DEFAULT_TEMPLATEFORMATTER
-            = "xin.jeasy.mybatis.generator.format.FreemarkerTemplateFormatter";
+            = "xin.jeasy.mybatis.generator.format.FreemarkerMultiTemplateFormatter";
 
     /**
      * 项目路径（目录需要已经存在）
@@ -94,8 +94,8 @@ public class TemplateFileListPlugin extends PluginAdapter {
 
         if (!StringUtility.stringHasValue(templateFormatterClass)) {
             templateFormatterClass = DEFAULT_TEMPLATEFORMATTER;
-            LOG.warn("没有配置 templateFormatterClass 模板处理器，使用默认的处理器!");
-            warnings.add("没有配置 templateFormatterClass 模板处理器，使用默认的处理器!");
+            LOG.warn("没有配置 templateFormatterClass FreemarkerMultiTemplateFormatter 模板处理器，使用默认的处理器!");
+            warnings.add("没有配置 templateFormatterClass FreemarkerMultiTemplateFormatter 模板处理器，使用默认的处理器!");
         }
 
 
@@ -130,15 +130,14 @@ public class TemplateFileListPlugin extends PluginAdapter {
                 continue;
             }
 
-            properties.setProperty("mapperSuffix", templateInfo.getMapperSuffix());
-
-            list.add(new GenerateByTemplateFile(tableClass,
-                    (TemplateFormatter) templateFormatter,
+            list.add(new GenerateByMultiTemplateFile(tableClass,
+                    (TemplateMultiFormatter) templateFormatter,
                     properties,
                     targetProject,
                     templateInfo.getTargetPackage(),
                     templateInfo.getFileName(),
-                    tContent));
+                    tContent, templateInfo.getMapperSuffix()));
+
         }
 
 
