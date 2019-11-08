@@ -56,7 +56,7 @@ public class ${tableClass.shortClassName}Controller {
         LogUtil.logApplicationInfo("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}请求参数<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>=" + <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
         AjaxResult<${tableClass.shortClassName}ContentDtoResponse> result = new AjaxResult<>();
         ${tableClass.shortClassName}ContentDtoResponse dtoResponse =
-                preStoredInfoService.select${tableClass.shortClassName}Content(<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
+                ${tableClass.variableName}Service.select${tableClass.shortClassName}Content(<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
         result.setMessage("查询成功");
         result.setData(dtoResponse);
         return result;
