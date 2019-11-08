@@ -24,6 +24,7 @@ public class ${tableClass.shortClassName}DtoRequest extends BaseDto {
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")
     private ${fieldNames.shortTypeName} ${fieldNames.fieldName};
+
 </#list>
 
 <#list tableClass.allFields as fieldNames>

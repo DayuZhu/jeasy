@@ -1,6 +1,8 @@
 <#assign dateTime = .now>
 package ${package};
 
+import com.zkt.idis.common.dto.request.BaseDto;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,8 +20,8 @@ import java.util.Date;
     </#list>
 </#list>
 
-@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数")
-public class ${tableClass.shortClassName}ListDtoRequest extends PageRequest {
+@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数")
+public class ${tableClass.shortClassName}ContentDtoResponse extends BaseDto {
 
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")

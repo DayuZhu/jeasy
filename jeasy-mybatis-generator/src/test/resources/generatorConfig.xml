@@ -31,6 +31,8 @@
                       AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.merchant;
                       AdzDtoRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       AdzListDtoRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
+                      AdzContentDtoResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
+                      AdzDtoResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       "/>
 
         </plugin>
