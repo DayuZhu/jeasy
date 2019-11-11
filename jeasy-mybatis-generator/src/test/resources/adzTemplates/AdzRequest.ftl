@@ -1,6 +1,8 @@
 <#assign dateTime = .now>
 package ${package};
 
+import com.zkt.idis.common.dto.request.BaseDto;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

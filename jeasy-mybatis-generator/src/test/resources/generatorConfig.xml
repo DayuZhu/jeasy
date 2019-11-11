@@ -29,12 +29,16 @@
             <property name="templateInfo"
                       value="
                       AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.gencode;
-                      AdzDtoRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
-                      AdzListDtoRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
-                      AdzContentDtoResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
-                      AdzDtoResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
+                      AdzRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
+                      AdzRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
+                      AdzResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
+                      AdzResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       AdzService.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service;
                       AdzServiceImpl.ftl-ServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service.impl;
+                      AdzResponse.ftl-Response-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
+                      AdzRequest.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
+                      AdzRequest.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
+                      AdzResponse.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
                       "/>
 
         </plugin>
