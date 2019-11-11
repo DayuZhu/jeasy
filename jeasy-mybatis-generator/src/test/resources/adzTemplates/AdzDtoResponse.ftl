@@ -2,6 +2,7 @@
 package ${package};
 
 import com.zkt.idis.common.dto.request.BaseDto;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,6 +34,9 @@ public class ${tableClass.shortClassName}DtoResponse extends BaseDto {
 
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")
+    <#if fieldNames.shortTypeName == "Date">
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    </#if>
     private ${fieldNames.shortTypeName} ${fieldNames.fieldName};
 
 </#list>
