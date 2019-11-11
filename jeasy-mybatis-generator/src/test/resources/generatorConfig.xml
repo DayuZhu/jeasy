@@ -28,7 +28,7 @@
             <!--templatePath-mapperSuffix-fileName-targetPackage;-->
             <property name="templateInfo"
                       value="
-                      AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.merchant;
+                      AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.gencode;
                       AdzDtoRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       AdzListDtoRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       AdzContentDtoResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
