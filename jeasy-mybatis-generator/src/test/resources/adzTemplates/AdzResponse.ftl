@@ -1,6 +1,9 @@
 <#assign dateTime = .now>
 package ${package};
 
+import com.zkt.idis.common.dto.request.BaseDto;
+import com.alibaba.fastjson.annotation.JSONField;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,18 +22,21 @@ import java.util.Date;
 </#list>
 
 /**
- * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求类
+ * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应类
  *
  * @className:${tableClass.shortClassName}${mapperSuffix}
  * @projectName:idis-svc
  * @author: generater-code
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
-@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数")
-public class ${tableClass.shortClassName}DtoRequest extends BaseDto {
+@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数")
+public class ${tableClass.shortClassName}${mapperSuffix} extends BaseDto {
 
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")
+    <#if fieldNames.shortTypeName == "Date">
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    </#if>
     private ${fieldNames.shortTypeName} ${fieldNames.fieldName};
 
 </#list>
