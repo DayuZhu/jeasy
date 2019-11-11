@@ -39,7 +39,8 @@
                       AdzRequest.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
                       AdzRequest.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
                       AdzResponse.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
-                      AdzService.ftl-ApiService-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant;"/>
+                      AdzService.ftl-ApiService-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant;
+                      AdzServiceImpl.ftl-ApiServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant.impl;"/>
 
         </plugin>
 

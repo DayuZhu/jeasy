@@ -1,6 +1,19 @@
 <#assign dateTime = .now>
 package ${package};
 
+<#if mapperSuffix?contains("Api")>
+import com.zkt.idis.api.request.${tableClass.shortClassName}ListRequest;
+import com.zkt.idis.api.request.${tableClass.shortClassName}Request;
+import com.zkt.idis.api.response.${tableClass.shortClassName}ContentResponse;
+import com.zkt.idis.api.response.${tableClass.shortClassName}Response;
+import com.zkt.idis.api.service.merchant.${tableClass.shortClassName}ApiService;
+import com.zkt.idis.common.dto.request.${tableClass.shortClassName}DtoRequest;
+import com.zkt.idis.common.dto.request.${tableClass.shortClassName}ListDtoRequest;
+import com.zkt.idis.common.dto.response.PageResponse;
+import com.zkt.log.LogUtil;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+<#else>
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageSerializable;
 import com.zkt.idis.common.dto.request.${tableClass.shortClassName}DtoRequest;
@@ -21,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+</#if>
 /**
  * 功能描述:${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}服务实现类
  *
@@ -30,8 +44,57 @@ import java.util.List;
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
 @Service
-public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass.shortClassName}Service {
+public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass.shortClassName}<#if mapperSuffix?contains("Api")>Api</#if>Service {
 
+<#if mapperSuffix?contains("Api")>
+    //@Autowired
+    //private IdisSvcClient idisSvcClient;
+
+    @Override
+    public void createOrModify${tableClass.shortClassName}(${tableClass.shortClassName}Request ${tableClass.variableName}Request) {
+        LogUtil.logApplicationInfo("进入创建或更新${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}API服务请求参数" + ${tableClass.variableName}Request.toString());
+        ${tableClass.shortClassName}DtoRequest ${tableClass.variableName}DtoRequest = new ${tableClass.shortClassName}DtoRequest();
+        BeanUtils.copyProperties(${tableClass.variableName}Request, ${tableClass.variableName}DtoRequest);
+        //TODO 补充相关逻辑
+
+        //TODO 补充Feign调用逻辑
+        //AjaxResult ajaxResult = idisSvcClient.creationOrModify(${tableClass.variableName}DtoRequest);
+        //AjaxResultParseUtil.getData(ajaxResult, ${tableClass.variableName}Request);
+
+    }
+
+    @Override
+    public ${tableClass.shortClassName}ContentResponse query${tableClass.shortClassName}Content(Integer <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>) {
+        LogUtil.logApplicationInfo("进入查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}API服务请求参数<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>=" + <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
+        //TODO 补充相关逻辑
+
+        //TODO 补充Feign调用逻辑
+        //AjaxResult<${tableClass.shortClassName}ContentDtoResponse> ajaxResult = idisSvcClient.queryInfo(preStoredInfoId);
+        //${tableClass.shortClassName}ContentDtoResponse data = AjaxResultParseUtil.getData(ajaxResult);
+        ${tableClass.shortClassName}ContentResponse ${tableClass.variableName}ContentResponse = new ${tableClass.shortClassName}ContentResponse();
+        //if (null != data) {
+        //    BeanUtils.copyProperties(data, ${tableClass.variableName}ContentResponse);
+        //}
+        return ${tableClass.variableName}ContentResponse;
+    }
+
+    @Override
+    public PageResponse<${tableClass.shortClassName}Response> query${tableClass.shortClassName}(${tableClass.shortClassName}ListRequest ${tableClass.variableName}ListRequest) {
+        LogUtil.logApplicationInfo("进入查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}列表API服务请求参数" + ${tableClass.variableName}ListRequest.toString());
+        ${tableClass.shortClassName}ListDtoRequest ${tableClass.variableName}ListDtoRequest = new ${tableClass.shortClassName}ListDtoRequest();
+        BeanUtils.copyProperties(${tableClass.variableName}ListRequest, ${tableClass.variableName}ListDtoRequest);
+        //TODO 补充相关逻辑
+
+        //TODO 补充Feign调用逻辑
+        //AjaxResult<PageResponse<${tableClass.shortClassName}DtoResponse>> ajaxResult = idisSvcClient.queryInfoList(${tableClass.variableName}ListDtoRequest);
+        //PageResponse<${tableClass.shortClassName}DtoResponse> data = AjaxResultParseUtil.getData(ajaxResult);
+        PageResponse<${tableClass.shortClassName}Response> response = new PageResponse<>();
+        //if (null != data) {
+        //   BeanUtils.copyProperties(data, response);
+        //}
+        return response;
+    }
+<#else>
     @Autowired
     private ${tableClass.shortClassName}Mapper ${tableClass.variableName}Mapper;
 
@@ -118,5 +181,6 @@ public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass
         });
         return response;
     }
+</#if>
 
 }
