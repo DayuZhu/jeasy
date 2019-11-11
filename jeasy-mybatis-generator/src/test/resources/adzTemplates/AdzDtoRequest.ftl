@@ -18,6 +18,14 @@ import java.util.Date;
     </#list>
 </#list>
 
+/**
+ * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求类
+ *
+ * @className:${tableClass.shortClassName}${mapperSuffix}
+ * @projectName:idis-svc
+ * @author: generater-code
+ * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
+ */
 @ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO请求参数")
 public class ${tableClass.shortClassName}DtoRequest extends BaseDto {
 

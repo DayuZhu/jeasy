@@ -20,6 +20,14 @@ import java.util.Date;
     </#list>
 </#list>
 
+/**
+ * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应类
+ *
+ * @className:${tableClass.shortClassName}${mapperSuffix}
+ * @projectName:idis-svc
+ * @author: generater-code
+ * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
+ */
 @ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}DTO响应参数")
 public class ${tableClass.shortClassName}DtoResponse extends BaseDto {
 

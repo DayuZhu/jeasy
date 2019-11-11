@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
  * @className:${tableClass.shortClassName}${mapperSuffix}
  * @projectName:idis-svc
  * @author: generater-code
- * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss zzzz")}
+ * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
 @RestController
 @RequestMapping(value = "/mis<#list tableClass.tableName?split("_") as uri><#if uri_index != 0 && uri != 'info'>/${uri}</#if></#list>")

@@ -34,6 +34,7 @@
                       AdzContentDtoResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       AdzDtoResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       AdzService.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service;
+                      AdzServiceImpl.ftl-ServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service.impl;
                       "/>
 
         </plugin>

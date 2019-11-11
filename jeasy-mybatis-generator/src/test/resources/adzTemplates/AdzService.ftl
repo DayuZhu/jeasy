@@ -13,7 +13,7 @@ import com.zkt.idis.common.dto.response.${tableClass.shortClassName}DtoResponse;
  * @className:${tableClass.shortClassName}${mapperSuffix}
  * @projectName:idis-svc
  * @author:generater-code
- * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss zzzz")}
+ * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
 public interface ${tableClass.shortClassName}Service {
 
