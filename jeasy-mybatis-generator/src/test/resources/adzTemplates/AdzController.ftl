@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
 @RequestMapping(value = "/mis<#list tableClass.tableName?split("_") as uri><#if uri_index != 0 && uri != 'info'>/${uri}</#if></#list>")
 @Api(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类", tags = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类")
 @Validated
-public class ${tableClass.shortClassName}Controller {
+public class ${tableClass.shortClassName}${mapperSuffix} {
 
     @Autowired
     private ${tableClass.shortClassName}Service ${tableClass.variableName}Service;

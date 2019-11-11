@@ -30,7 +30,7 @@
                       value="
                       AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.gencode;
                       AdzRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
-                      AdzRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
+                      AdzListRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
                       AdzResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       AdzResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
                       AdzService.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service;
@@ -39,7 +39,7 @@
                       AdzRequest.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
                       AdzRequest.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
                       AdzResponse.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
-                      "/>
+                      AdzService.ftl-ApiService-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant;"/>
 
         </plugin>
 

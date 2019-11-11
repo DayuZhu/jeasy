@@ -30,7 +30,7 @@ import java.util.List;
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
 @Service
-public class ${tableClass.shortClassName}ServiceImpl implements ${tableClass.shortClassName}Service {
+public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass.shortClassName}Service {
 
     @Autowired
     private ${tableClass.shortClassName}Mapper ${tableClass.variableName}Mapper;
