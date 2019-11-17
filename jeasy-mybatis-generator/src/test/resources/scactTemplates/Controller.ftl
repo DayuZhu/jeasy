@@ -1,7 +1,7 @@
 <#assign dateTime = .now>
 package ${package};
 
-import com.com.sc.act.api.request.${tableClass.shortClassName}Request;
+import com.sc.act.api.request.${tableClass.shortClassName}Request;
 import com.sc.act.api.commons.web.base.BaseController;
 import com.sc.act.api.commons.web.base.PageResponse;
 import com.sc.act.api.commons.web.base.Result;
@@ -30,7 +30,6 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping(value = "/mis<#list tableClass.tableName?split("_") as uri><#if uri_index != 0 && uri != 'info'>/${uri}</#if></#list>")
 @Api(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类", tags = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}控制类")
-@Validated
 public class ${tableClass.shortClassName}${mapperSuffix} extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(${tableClass.shortClassName}Controller.class);
@@ -57,7 +56,7 @@ public class ${tableClass.shortClassName}${mapperSuffix} extends BaseController 
     @GetMapping("/info")
     public Result<${tableClass.shortClassName}ContentResponse> queryInfo(@NotNull @RequestParam(name = "<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>") Integer <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>) {
         LOG.info("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}请求参数<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>={}", <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
-        Result<${tableClass.shortClassName}ContentDtoResponse> result = new Result<>();
+        Result<${tableClass.shortClassName}ContentResponse> result = new Result<>();
         ${tableClass.shortClassName}ContentResponse response =
                 ${tableClass.variableName}Service.select${tableClass.shortClassName}Content(<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
         result.setRetMsg("查询成功");
@@ -69,7 +68,7 @@ public class ${tableClass.shortClassName}${mapperSuffix} extends BaseController 
     @PostMapping("/info/list")
     public Result<PageResponse<${tableClass.shortClassName}Response>> queryInfoList(@RequestBody @Valid ${tableClass.shortClassName}ListRequest ${tableClass.variableName}ListRequest) {
         LOG.info("查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}列表请求参数{}", ${tableClass.variableName}ListRequest.toString());
-        Result<PageResponse<${tableClass.shortClassName}Response>> result = new AjaxResult<>();
+        Result<PageResponse<${tableClass.shortClassName}Response>> result = new Result<>();
         PageResponse<${tableClass.shortClassName}Response> response = ${tableClass.variableName}Service.select${tableClass.shortClassName}(${tableClass.variableName}ListRequest);
         result.setRetMsg("查询成功");
         result.setData(response);

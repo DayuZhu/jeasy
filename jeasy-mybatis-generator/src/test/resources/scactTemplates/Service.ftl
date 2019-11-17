@@ -1,7 +1,7 @@
 <#assign dateTime = .now>
 package ${package};
 
-import com.com.sc.act.api.request.${tableClass.shortClassName}Request;
+import com.sc.act.api.request.${tableClass.shortClassName}Request;
 import com.sc.act.api.commons.web.base.PageResponse;
 import com.sc.act.api.request.${tableClass.shortClassName}ListRequest;
 import com.sc.act.api.response.${tableClass.shortClassName}ContentResponse;

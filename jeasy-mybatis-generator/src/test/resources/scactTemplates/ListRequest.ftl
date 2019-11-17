@@ -1,6 +1,7 @@
 <#assign dateTime = .now>
 package ${package};
 
+import com.sc.act.api.commons.web.base.PageRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

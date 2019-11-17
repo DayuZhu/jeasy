@@ -1,7 +1,7 @@
 <#assign dateTime = .now>
 package ${package};
 
-import com.com.sc.act.api.request.${tableClass.shortClassName}Request;
+import com.sc.act.api.request.${tableClass.shortClassName}Request;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageSerializable;
 import com.sc.act.api.commons.web.base.PageResponse;
@@ -76,7 +76,7 @@ public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass
     }
 
     @Override
-    public ${tableClass.shortClassName}ContentDtoResponse select${tableClass.shortClassName}Content(Integer <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>) {
+    public ${tableClass.shortClassName}ContentResponse select${tableClass.shortClassName}Content(Integer <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>) {
         LOG.info("进入查询${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}服务请求参数<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>{}", <#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
         ${tableClass.shortClassName}ContentResponse ${tableClass.variableName}ContentResponse = new ${tableClass.shortClassName}ContentResponse();
         ${tableClass.shortClassName} ${tableClass.variableName} = ${tableClass.variableName}Mapper.selectByPrimaryKey(<#list tableClass.pkFields as fieldNames>${fieldNames.fieldName}</#list>);
@@ -107,12 +107,12 @@ public class ${tableClass.shortClassName}${mapperSuffix} implements ${tableClass
         PageHelper.startPage(${tableClass.variableName}ListRequest.getPageIndex(), ${tableClass.variableName}ListRequest.getPageSize());
         List<${tableClass.shortClassName}> ${tableClass.variableName}List = ${tableClass.variableName}Mapper.selectByExample(${tableClass.variableName}Example);
         PageSerializable<${tableClass.shortClassName}> pageInfo = PageSerializable.of(${tableClass.variableName}List);
-        PageResponse<${tableClass.shortClassName}DtoResponse> response = new PageResponse<>();
+        PageResponse<${tableClass.shortClassName}Response> response = new PageResponse<>();
         response.setTotal(pageInfo.getTotal());
-        List<${tableClass.shortClassName}DtoResponse> list = new ArrayList<>();
+        List<${tableClass.shortClassName}Response> list = new ArrayList<>();
         response.setList(list);
         ${tableClass.variableName}List.forEach(${tableClass.variableName} -> {
-            ${tableClass.shortClassName}Response ${tableClass.variableName}DtoResponse = new ${tableClass.shortClassName}Response();
+            ${tableClass.shortClassName}Response ${tableClass.variableName}Response = new ${tableClass.shortClassName}Response();
 
             //TODO 有些不需要的字段，可以不用 bean copy
             BeanUtils.copyProperties(${tableClass.variableName}, ${tableClass.variableName}Response);
