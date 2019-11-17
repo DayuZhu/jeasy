@@ -13,16 +13,16 @@
 
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!--覆盖生成XML文件-->
-        <plugin type="zkt.mybatis.generator.junit.UnmergeableXmlMappersPlugin"/>
+        <plugin type="com.mybatis.generator.junit.UnmergeableXmlMappersPlugin"/>
 
         <plugin
                 type="xin.jeasy.mybatis.generator.plugin.TemplateFileMultiPlugin">
 
             <property name="projectPackage"
-                      value="com.zkt.idis.svc"/>
+                      value="com.sc.act.api"/>
 
             <property name="targetProject" value="src/test/java"/>
-            <property name="templateRoot" value="adzTemplates/"/>
+            <property name="templateRoot" value="scactTemplates/"/>
 
 
             <!--templatePath-mapperSuffix-fileName-targetPackage;-->
@@ -61,13 +61,13 @@
         <!--</commentGenerator>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.93.137.244:33061/zkt_idis?tinyInt1isBit=false"
-                        userId="zkt_dev" password="zkT_Dev9827-LcL">
+                        connectionURL="jdbc:mysql://localhost:3306/sc_act?tinyInt1isBit=false"
+                        userId="root" password="123456">
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
 
-        <javaTypeResolver type="zkt.mybatis.generator.junit.MyFullyQualifiesJavaType">
+        <javaTypeResolver type="com.mybatis.generator.junit.MyFullyQualifiesJavaType">
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 

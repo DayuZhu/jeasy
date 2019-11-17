@@ -1,4 +1,4 @@
-package zkt.mybatis.generator.junit;
+package com.mybatis.generator.junit;
 
 import java.util.ArrayList;
 import java.util.List;

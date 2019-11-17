@@ -1,4 +1,4 @@
-package zkt.mybatis.generator.junit;
+package com.mybatis.generator.junit;
 
 import org.mybatis.generator.api.GeneratedXmlFile;
 import org.mybatis.generator.api.IntrospectedTable;
