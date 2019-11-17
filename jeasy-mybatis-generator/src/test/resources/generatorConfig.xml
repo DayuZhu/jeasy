@@ -16,7 +16,7 @@
         <plugin type="com.mybatis.generator.junit.UnmergeableXmlMappersPlugin"/>
 
         <plugin
-                type="xin.jeasy.mybatis.generator.plugin.TemplateFileMultiPlugin">
+                type="com.mybatis.generator.junit.TemplateFileMultiPlugin">
 
             <property name="projectPackage"
                       value="com.sc.act.api"/>
@@ -28,20 +28,13 @@
             <!--templatePath-mapperSuffix-fileName-targetPackage;-->
             <property name="templateInfo"
                       value="
-                      AdzController.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.controller.gencode;
-                      AdzRequest.ftl-DtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
-                      AdzListRequest.ftl-ListDtoRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.request;
-                      AdzResponse.ftl-ContentDtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
-                      AdzResponse.ftl-DtoResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.common.dto.response;
-                      AdzService.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service;
-                      AdzServiceImpl.ftl-ServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.svc.service.impl;
-                      AdzResponse.ftl-Response-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
-                      AdzRequest.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
-                      AdzRequest.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.request;
-                      AdzResponse.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.response;
-                      AdzService.ftl-ApiService-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant;
-                      AdzServiceImpl.ftl-ApiServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.service.merchant.impl;
-                      AdzController.ftl-MisController-${tableClass.shortClassName}${mapperSuffix}.java-com.zkt.idis.api.controller.merchant;"/>
+                      Controller.ftl-Controller-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.controller;
+                      Service.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.service;
+                      ServiceImpl.ftl-ServiceImpl-${tableClass.shortClassName}${mapperSuffix}.com.sc.act.api.service.impl;
+                      Response.ftl-Response-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.response;
+                      Request.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.com.sc.act.api.request;
+                      Request.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.request;
+                      Response.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.response;"/>
 
         </plugin>
 
@@ -72,7 +65,7 @@
         </javaTypeResolver>
 
         <javaModelGenerator
-                targetPackage="com.zkt.idis.svc.model"
+                targetPackage="com.sc.act.api.model.auto"
                 targetProject="src\test\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -82,18 +75,15 @@
                          targetProject="src\test\resources"/>
 
         <javaClientGenerator
-                targetPackage="com.zkt.idis.svc.dao.db.auto"
+                targetPackage="com.sc.act.api.mapper.auto"
                 targetProject="src\test\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="idis_pre_stored_info" domainObjectName="PreStoredInfo">
-            <generatedKey column="pre_stored_info_id" sqlStatement="MySql" identity="true"/>
+        <table tableName="sc_activity" domainObjectName="Activity">
+            <generatedKey column="activity_id" sqlStatement="MySql" identity="true"/>
         </table>
 
-        <table tableName="idis_user_coupon" domainObjectName="UserCoupon">
-            <generatedKey column="idis_user_coupon_id" sqlStatement="MySql" identity="true"/>
-        </table>
 
     </context>
 </generatorConfiguration>
