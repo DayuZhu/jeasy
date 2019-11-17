@@ -1,9 +1,8 @@
 <#assign dateTime = .now>
 package ${package};
 
-import com.zkt.idis.common.dto.request.BaseDto;
 import com.alibaba.fastjson.annotation.JSONField;
-
+import com.sc.act.api.commons.web.base.BasePojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -30,7 +29,7 @@ import java.util.Date;
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
 @ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>响应参数")
-public class ${tableClass.shortClassName}${mapperSuffix} extends BaseDto {
+public class ${tableClass.shortClassName}${mapperSuffix} extends BasePojo {
 
 <#list tableClass.allFields as fieldNames>
     @ApiModelProperty("${fieldNames.remarks}")

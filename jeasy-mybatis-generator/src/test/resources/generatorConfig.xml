@@ -32,8 +32,8 @@
                       Service.ftl-Service-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.service;
                       ServiceImpl.ftl-ServiceImpl-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.service.impl;
                       Response.ftl-Response-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.response;
-                      Request.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.com.sc.act.api.request;
-                      Request.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.request;
+                      Request.ftl-Request-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.request;
+                      ListRequest.ftl-ListRequest-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.request;
                       Response.ftl-ContentResponse-${tableClass.shortClassName}${mapperSuffix}.java-com.sc.act.api.response"/>
 
         </plugin>
@@ -54,7 +54,7 @@
         <!--</commentGenerator>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/sc_act?tinyInt1isBit=false"
+                        connectionURL="jdbc:mysql://localhost:3306/sc_act?characterEncoding=UTF-8&amp;useUnicode=true&amp;useSSL=false&amp;tinyInt1isBit=false"
                         userId="root" password="123456">
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>

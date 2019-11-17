@@ -22,7 +22,7 @@ import java.util.Date;
  * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>列表请求类
  *
  * @className:${tableClass.shortClassName}${mapperSuffix}
- * @projectName:idis-svc
+ * @projectName:
  * @author: generater-code
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
