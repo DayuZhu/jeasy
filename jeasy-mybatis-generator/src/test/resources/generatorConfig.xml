@@ -83,7 +83,30 @@
         <table tableName="sc_activity" domainObjectName="Activity">
             <generatedKey column="activity_id" sqlStatement="MySql" identity="true"/>
         </table>
-
+        <table tableName="sc_acc_sep_record" domainObjectName="AccSepRecord">
+            <generatedKey column="acc_sep_record_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_activity_winners" domainObjectName="ActivityWinners">
+            <generatedKey column="activity_winners_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_activity_wins_pdt" domainObjectName="ActivityWinsPdt">
+            <generatedKey column="activity_wins_pdt_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_product" domainObjectName="Product">
+            <generatedKey column="product_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_product_ticket" domainObjectName="ProductTicket">
+            <generatedKey column="product_ticket_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_ticket" domainObjectName="Ticket">
+            <generatedKey column="ticket_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_user" domainObjectName="User">
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="sc_user_acc_info" domainObjectName="UserAccInfo">
+            <generatedKey column="user_acc_info_id" sqlStatement="MySql" identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>
