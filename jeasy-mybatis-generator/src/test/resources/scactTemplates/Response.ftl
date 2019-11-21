@@ -21,14 +21,14 @@ import java.util.Date;
 </#list>
 
 /**
- * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>响应类
+ * 功能描述: ${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Content")>内容</#if>响应类
  *
  * @className:${tableClass.shortClassName}${mapperSuffix}
  * @projectName:
  * @author: generater-code
  * @date: ${dateTime?string("yyyy-MM-dd HH:mm:ss")}
  */
-@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Dto")>DTO</#if>响应参数")
+@ApiModel(value = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Content")>内容</#if>响应参数", description = "${tableClass.tableComment?substring(0,(tableClass.tableComment)?length-1)}<#if mapperSuffix?contains("Content")>内容</#if>响应参数")
 public class ${tableClass.shortClassName}${mapperSuffix} extends BasePojo {
 
 <#list tableClass.allFields as fieldNames>
