@@ -24,7 +24,7 @@
 		<jcl.over.slf4j.verison>1.7.25</jcl.over.slf4j.verison>
 		<junit.version>4.12</junit.version>
 		<guava.version>23.0</guava.version>
-		<mysql.connector.java.version>5.1.38</mysql.connector.java.version>
+		<mysql.connector.java.version>8.0.28</mysql.connector.java.version>
 		<freemarker.version>2.3.23</freemarker.version>
 		<mybatis.version>3.4.4</mybatis.version>
         <spring.version>4.3.10.RELEASE</spring.version>
