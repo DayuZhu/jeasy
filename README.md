@@ -107,7 +107,7 @@ public class ${tableClass.shortClassName}${mapperSuffix} extends BaseController 
 
 }
 ```
-则会生成对应的controller，controller名称为数据库表名和Controller的组合，比如表名为test，则类名为TestController
+它会生成对应的controller，controller名称为数据库表名和Controller的组合，比如表名为test，则类名为TestController
 ```
 package xin.jeasy.mybatis.generator.tests.web.controller;
 
